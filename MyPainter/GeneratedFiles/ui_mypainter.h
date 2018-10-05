@@ -13,8 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -42,7 +44,10 @@ public:
     QAction *actionKruznica;
     QAction *actionverzia_1;
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_3;
+    QListWidget *listWidget;
+    QGroupBox *groupBox;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents_3;
@@ -55,7 +60,7 @@ public:
     {
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
-        MyPainterClass->resize(613, 494);
+        MyPainterClass->resize(576, 396);
         actionOpen = new QAction(MyPainterClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionSave = new QAction(MyPainterClass);
@@ -85,10 +90,34 @@ public:
         actionverzia_1->setCheckable(true);
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout(centralWidget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
+        listWidget->setSizePolicy(sizePolicy);
+
+        verticalLayout_3->addWidget(listWidget);
+
+        groupBox = new QGroupBox(centralWidget);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
+
+        verticalLayout_3->addWidget(groupBox);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_3);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -99,18 +128,18 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 591, 431));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 333));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        horizontalLayout_2->addLayout(horizontalLayout);
 
         MyPainterClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MyPainterClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 613, 21));
+        menuBar->setGeometry(QRect(0, 0, 576, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEffects = new QMenu(menuBar);
@@ -141,6 +170,7 @@ public:
         QObject::connect(actionRotate_left, SIGNAL(triggered()), MyPainterClass, SLOT(ActionLeft()));
         QObject::connect(actionRotate_right, SIGNAL(triggered()), MyPainterClass, SLOT(ActionRight()));
         QObject::connect(actionKruznica, SIGNAL(triggered()), MyPainterClass, SLOT(kruznicamenu()));
+        QObject::connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), MyPainterClass, SLOT(zmena_itemu()));
 
         QMetaObject::connectSlotsByName(MyPainterClass);
     } // setupUi
@@ -161,6 +191,7 @@ public:
         actionRotate_right->setText(QApplication::translate("MyPainterClass", "Rotate right", Q_NULLPTR));
         actionKruznica->setText(QApplication::translate("MyPainterClass", "Kruznica", Q_NULLPTR));
         actionverzia_1->setText(QApplication::translate("MyPainterClass", "verzia_1", Q_NULLPTR));
+        groupBox->setTitle(QString());
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));
     } // retranslateUi

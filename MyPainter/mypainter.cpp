@@ -18,6 +18,8 @@ void MyPainter::ActionOpen()
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "image files (*.png *.jpg *.bmp)");
 	if (!fileName.isEmpty())
 		paintWidget.openImage(fileName);
+
+	ui.listWidget->addItem(fileName);
 }
 
 void MyPainter::ActionSave()
@@ -61,5 +63,14 @@ void MyPainter::ActionRight()
 	QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
 	mbox.setText(text);
 	mbox.exec();
+}
+
+void MyPainter::zmena_itemu()
+{
+
+	QString fileName = ui.listWidget->currentItem()->text();
+	if (!fileName.isEmpty())
+		paintWidget.openImage(fileName);
+
 }
 

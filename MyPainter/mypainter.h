@@ -5,7 +5,10 @@
 #include "ui_mypainter.h"
 #include "paintwidget.h"
 #include <QElapsedTimer>
-#include "kruz.h"
+
+#include <QListView>
+#include <QListWidget>
+
 
 class MyPainter : public QMainWindow
 {
@@ -25,6 +28,8 @@ public slots:
 
 	void ActionLeft();
 	void ActionRight();
+
+	void zmena_itemu();
 
 	
 
