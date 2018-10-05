@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MyPainter</string>
+   <string>Projekt</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -177,6 +177,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="mypainter.qrc"/>
+  <include location="../../../../../Qt/Qt5.9.2/Examples/Qt-5.9.2/svg/richtext/textobject/resources.qrc"/>
+  <include location="../../../../../Qt/Qt5.9.2/Examples/Qt-5.9.2/svg/network/bearercloud/icons.qrc"/>
+  <include location="../../../../../Qt/Qt5.9.2/Tools/QtCreator/share/qtcreator/templates/wizards/files/qrc/file.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -177,7 +177,7 @@ public:
 
     void retranslateUi(QMainWindow *MyPainterClass)
     {
-        MyPainterClass->setWindowTitle(QApplication::translate("MyPainterClass", "MyPainter", Q_NULLPTR));
+        MyPainterClass->setWindowTitle(QApplication::translate("MyPainterClass", "Projekt", Q_NULLPTR));
         actionOpen->setText(QApplication::translate("MyPainterClass", "Open", Q_NULLPTR));
         actionSave->setText(QApplication::translate("MyPainterClass", "Save", Q_NULLPTR));
         actionClear->setText(QApplication::translate("MyPainterClass", "Clear", Q_NULLPTR));

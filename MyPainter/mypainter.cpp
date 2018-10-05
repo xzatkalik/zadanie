@@ -3,6 +3,7 @@
 MyPainter::MyPainter(QWidget *parent)
 	: QMainWindow(parent)
 {
+	setWindowIcon(QIcon(":/cell.svg"));
 	ui.setupUi(this);
 	ui.scrollArea->setWidget(&this->paintWidget);
 	ui.scrollArea->setBackgroundRole(QPalette::Dark);
