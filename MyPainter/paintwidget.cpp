@@ -28,8 +28,8 @@ bool PaintWidget::openImage(const QString &fileName)
 	resizeImage(&loadedImage, newSize);
 	image = loadedImage;
 
-//	otvorene_image.append(image);
-	//otvorene_filename.append(fileName);
+	otvorene_image.append(image);
+	otvorene_filename.append(fileName);
 
 	this->resize(image.size());
 	this->setMinimumSize(image.size());
@@ -42,7 +42,7 @@ bool PaintWidget::changeImage(const QString &fileName)
 {
 	int index = otvorene_filename.indexOf(fileName);
 
-	//image = otvorene_image[index];
+	image = otvorene_image[index];
 
 	update();
 

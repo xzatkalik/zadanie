@@ -26,8 +26,7 @@ void MyPainter::ActionOpen()
 		
 
 	ui.listWidget->addItem(fileName);
-	otvorene_fronta.append(otvoreny);
-	otvorene_filenames.append(fileName);
+	
 }
 	
 void MyPainter::ActionSave()
@@ -77,7 +76,6 @@ void MyPainter::zmena_itemu()
 {
 
 	QString fileName = ui.listWidget->currentItem()->text();
-	//int subor = otvorene_filenames.indexOf(fileName);
 
 
 //	paintWidget = otvorene_fronta[subor];

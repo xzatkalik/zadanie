@@ -55,7 +55,7 @@ private:
 	int myPenWidth;
 	QColor myPenColor;
 	QImage image;
-	QList<QImage *> otvorene_image;
+	QList<QImage> otvorene_image;
 	QList<QString> otvorene_filename;
 	QPoint lastPoint;
 	
