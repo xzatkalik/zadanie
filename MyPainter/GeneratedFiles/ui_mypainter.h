@@ -61,6 +61,14 @@ public:
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
         MyPainterClass->resize(576, 396);
+        QIcon icon;
+        QString iconThemeName = QStringLiteral(":/lan.svg");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QStringLiteral(":/lan.svg"), QSize(), QIcon::Normal, QIcon::On);
+        }
+        MyPainterClass->setWindowIcon(icon);
         actionOpen = new QAction(MyPainterClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionSave = new QAction(MyPainterClass);

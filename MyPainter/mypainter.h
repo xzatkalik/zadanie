@@ -8,6 +8,7 @@
 
 #include <QListView>
 #include <QListWidget>
+#include <QMap>
 
 
 class MyPainter : public QMainWindow
@@ -36,6 +37,10 @@ public slots:
 private:
 	Ui::MyPainterClass ui;
 	PaintWidget paintWidget;
+
+	PaintWidget *otvoreny;
+	QList<PaintWidget *> otvorene_fronta;
+	QList<QString> otvorene_filenames;
 };
 
 #endif // MYPAINTER_H

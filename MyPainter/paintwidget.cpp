@@ -19,15 +19,37 @@ bool PaintWidget::openImage(const QString &fileName)
 	if (!loadedImage.load(fileName))
 		return false;
 
+	/*if (!otvorene_image.isEmpty() && otvorene_filename.indexOf(fileName) < 0)
+	{
+		otvorene_image.append(image);
+		otvorene_filename.append(fileName);
+	}*/
 	QSize newSize = loadedImage.size();
 	resizeImage(&loadedImage, newSize);
 	image = loadedImage;
+
+//	otvorene_image.append(image);
+	//otvorene_filename.append(fileName);
+
 	this->resize(image.size());
 	this->setMinimumSize(image.size());
 	modified = false;
 	update();
 	return true;
 }
+
+bool PaintWidget::changeImage(const QString &fileName)
+{
+	int index = otvorene_filename.indexOf(fileName);
+
+	//image = otvorene_image[index];
+
+	update();
+
+	return true;
+}
+
+
 
 bool PaintWidget::newImage(int x, int y)
 {

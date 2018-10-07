@@ -21,6 +21,7 @@ public:
 	PaintWidget(QWidget *parent = 0);
 
 	bool openImage(const QString &fileName);
+	bool changeImage(const QString & fileName);
 	bool newImage(int x, int y);
 	bool saveImage(const QString &fileName);
 	void setPenColor(const QColor &newColor);
@@ -54,6 +55,8 @@ private:
 	int myPenWidth;
 	QColor myPenColor;
 	QImage image;
+	QList<QImage *> otvorene_image;
+	QList<QString> otvorene_filename;
 	QPoint lastPoint;
 	
 

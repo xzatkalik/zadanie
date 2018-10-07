@@ -3,7 +3,6 @@
 MyPainter::MyPainter(QWidget *parent)
 	: QMainWindow(parent)
 {
-	setWindowIcon(QIcon(":/cell.svg"));
 	ui.setupUi(this);
 	ui.scrollArea->setWidget(&this->paintWidget);
 	ui.scrollArea->setBackgroundRole(QPalette::Dark);
@@ -11,18 +10,26 @@ MyPainter::MyPainter(QWidget *parent)
 
 MyPainter::~MyPainter()
 {
-
+	free(otvoreny);
+	otvorene_fronta.clear();
 }
 
 void MyPainter::ActionOpen()
 {
+	//otvoreny = new PaintWidget();
+	//ui.scrollArea->setWidget(this->otvoreny);
+
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "image files (*.png *.jpg *.bmp)");
 	if (!fileName.isEmpty())
 		paintWidget.openImage(fileName);
+		//otvoreny->openImage(fileName);
+		
 
 	ui.listWidget->addItem(fileName);
+	otvorene_fronta.append(otvoreny);
+	otvorene_filenames.append(fileName);
 }
-
+	
 void MyPainter::ActionSave()
 {
 	QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), "untitled.png", tr("png Files (*.png)"));
@@ -70,8 +77,12 @@ void MyPainter::zmena_itemu()
 {
 
 	QString fileName = ui.listWidget->currentItem()->text();
+	//int subor = otvorene_filenames.indexOf(fileName);
+
+
+//	paintWidget = otvorene_fronta[subor];
 	if (!fileName.isEmpty())
-		paintWidget.openImage(fileName);
+		paintWidget.changeImage(fileName);
 
 }
 
