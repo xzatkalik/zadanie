@@ -36,10 +36,12 @@ public slots:
 
 private:
 	Ui::MyPainterClass ui;
-	PaintWidget paintWidget;
+	QList<PaintWidget*> paintWidget;
+	int otvorene = 0;
+	PaintWidget *prve;
 
 	PaintWidget *otvoreny;
-	QList<PaintWidget> otvorene_fronta;
+	QList<PaintWidget *> otvorene_fronta;
 	QList<QString> otvorene_filenames;
 };
 
