@@ -78,6 +78,7 @@ void MyPainter::zmena_itemu()
 	QString fileName = ui.listWidget->currentItem()->text();
 
 
+
 //	paintWidget = otvorene_fronta[subor];
 	if (!fileName.isEmpty())
 		paintWidget.changeImage(fileName);
