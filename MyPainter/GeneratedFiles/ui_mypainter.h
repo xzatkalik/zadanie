@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mypainter.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.2
+** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -43,6 +43,7 @@ public:
     QAction *actionRotate_right;
     QAction *actionKruznica;
     QAction *actionverzia_1;
+    QAction *actionExit;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_3;
@@ -60,7 +61,7 @@ public:
     {
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
-        MyPainterClass->resize(576, 396);
+        MyPainterClass->resize(576, 383);
         QIcon icon;
         QString iconThemeName = QStringLiteral(":/lan.svg");
         if (QIcon::hasThemeIcon(iconThemeName)) {
@@ -96,6 +97,8 @@ public:
         actionverzia_1 = new QAction(MyPainterClass);
         actionverzia_1->setObjectName(QStringLiteral("actionverzia_1"));
         actionverzia_1->setCheckable(true);
+        actionExit = new QAction(MyPainterClass);
+        actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -136,7 +139,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 333));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 320));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -159,9 +162,9 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEffects->menuAction());
-        menuFile->addAction(actionNew);
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
+        menuFile->addAction(actionExit);
         menuEffects->addAction(actionRotate_left);
         menuEffects->addAction(actionRotate_right);
 
@@ -179,6 +182,7 @@ public:
         QObject::connect(actionRotate_right, SIGNAL(triggered()), MyPainterClass, SLOT(ActionRight()));
         QObject::connect(actionKruznica, SIGNAL(triggered()), MyPainterClass, SLOT(kruznicamenu()));
         QObject::connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), MyPainterClass, SLOT(zmena_itemu()));
+        QObject::connect(actionExit, SIGNAL(triggered()), MyPainterClass, SLOT(close()));
 
         QMetaObject::connectSlotsByName(MyPainterClass);
     } // setupUi
@@ -199,6 +203,7 @@ public:
         actionRotate_right->setText(QApplication::translate("MyPainterClass", "Rotate right", Q_NULLPTR));
         actionKruznica->setText(QApplication::translate("MyPainterClass", "Kruznica", Q_NULLPTR));
         actionverzia_1->setText(QApplication::translate("MyPainterClass", "verzia_1", Q_NULLPTR));
+        actionExit->setText(QApplication::translate("MyPainterClass", "Exit", Q_NULLPTR));
         groupBox->setTitle(QString());
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>576</width>
-    <height>396</height>
+    <height>383</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,7 +72,7 @@
            <x>0</x>
            <y>0</y>
            <width>290</width>
-           <height>333</height>
+           <height>320</height>
           </rect>
          </property>
         </widget>
@@ -95,9 +95,9 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuEffects">
     <property name="title">
@@ -178,13 +178,18 @@
     <string>verzia_1</string>
    </property>
   </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="mypainter.qrc"/>
-  <include location="../../../../../Qt/Qt5.9.2/Examples/Qt-5.9.2/svg/richtext/textobject/resources.qrc"/>
-  <include location="../../../../../Qt/Qt5.9.2/Examples/Qt-5.9.2/svg/network/bearercloud/icons.qrc"/>
-  <include location="../../../../../Qt/Qt5.9.2/Tools/QtCreator/share/qtcreator/templates/wizards/files/qrc/file.qrc"/>
+  <include location="mypainter.qrc"/>
+  <include location="mypainter.qrc"/>
+  <include location="mypainter.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -392,6 +397,22 @@
     <hint type="destinationlabel">
      <x>296</x>
      <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MyPainterClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>197</y>
     </hint>
    </hints>
   </connection>

@@ -19,30 +19,41 @@ bool PaintWidget::openImage(const QString &fileName)
 	if (!loadedImage.load(fileName))
 		return false;
 
-	/*if (!otvorene_image.isEmpty() && otvorene_filename.indexOf(fileName) < 0)
+	if (otvorene_filename.indexOf(fileName) >= 0)
 	{
+		QMessageBox mbox;
+		QString text = "Tento obrazok uz je otvoreny";
+		mbox.setText(text);
+		mbox.exec();
+
+		return false;
+	}
+	else {
+		QSize newSize = loadedImage.size();
+		resizeImage(&loadedImage, newSize);
+		image = loadedImage;
+
 		otvorene_image.append(image);
 		otvorene_filename.append(fileName);
-	}*/
-	QSize newSize = loadedImage.size();
-	resizeImage(&loadedImage, newSize);
-	image = loadedImage;
+		opened = otvorene_image.size() - 1;
 
-	otvorene_image.append(image);
-	otvorene_filename.append(fileName);
-
-	this->resize(image.size());
-	this->setMinimumSize(image.size());
-	modified = false;
-	update();
-	return true;
+		this->resize(image.size());
+		this->setMinimumSize(image.size());
+		modified = false;
+		update();
+		return true;
+	}
 }
 
 bool PaintWidget::changeImage(const QString &fileName)
 {
-	int index = otvorene_filename.indexOf(fileName);
+	otvorene_image[opened] = image;
 
-	image = otvorene_image[index];
+	//int index = otvorene_filename.indexOf(fileName);
+	//image = otvorene_image[index];
+	//opened = index;
+	opened = otvorene_filename.indexOf(fileName);
+	image = otvorene_image[opened];
 
 	update();
 

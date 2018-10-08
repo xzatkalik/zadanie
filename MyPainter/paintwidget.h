@@ -58,6 +58,8 @@ private:
 	QList<QImage> otvorene_image;
 	QList<QString> otvorene_filename;
 	QPoint lastPoint;
+
+	int opened;
 	
 
 	

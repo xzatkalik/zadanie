@@ -41,6 +41,7 @@ private:
 	PaintWidget *otvoreny;
 	QList<PaintWidget> otvorene_fronta;
 	QList<QString> otvorene_filenames;
+	
 };
 
 #endif // MYPAINTER_H

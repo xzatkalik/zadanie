@@ -18,14 +18,14 @@ void MyPainter::ActionOpen()
 {
 	//otvoreny = new PaintWidget();
 	//ui.scrollArea->setWidget(this->otvoreny);
+	bool otvorilo = false;
 
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "image files (*.png *.jpg *.bmp)");
 	if (!fileName.isEmpty())
-		paintWidget.openImage(fileName);
+		 otvorilo = paintWidget.openImage(fileName);
 		//otvoreny->openImage(fileName);
 		
-
-	ui.listWidget->addItem(fileName);
+	if(otvorilo) ui.listWidget->addItem(fileName);
 	
 }
 	
@@ -56,9 +56,9 @@ void MyPainter::ActionLeft()
 	QElapsedTimer timer;
 	timer.start();
 	paintWidget.RotateLeft();
-	QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
+	/*QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
 	mbox.setText(text);
-	mbox.exec();
+	mbox.exec();*/
 }
 
 void MyPainter::ActionRight()
@@ -67,9 +67,9 @@ void MyPainter::ActionRight()
 	QElapsedTimer timer;
 	timer.start();
 	paintWidget.RotateRight();
-	QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
+	/*QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
 	mbox.setText(text);
-	mbox.exec();
+	mbox.exec();*/
 }
 
 void MyPainter::zmena_itemu()
