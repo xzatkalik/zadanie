@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mypainter.ui'
 **
-** Created by: Qt User Interface Compiler version 5.8.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -44,6 +44,9 @@ public:
     QAction *actionKruznica;
     QAction *actionverzia_1;
     QAction *actionExit;
+    QAction *actionAverage_algorithm;
+    QAction *actionWeightened;
+    QAction *actionGrayscale;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_3;
@@ -99,6 +102,15 @@ public:
         actionverzia_1->setCheckable(true);
         actionExit = new QAction(MyPainterClass);
         actionExit->setObjectName(QStringLiteral("actionExit"));
+        actionAverage_algorithm = new QAction(MyPainterClass);
+        actionAverage_algorithm->setObjectName(QStringLiteral("actionAverage_algorithm"));
+        actionAverage_algorithm->setCheckable(true);
+        actionWeightened = new QAction(MyPainterClass);
+        actionWeightened->setObjectName(QStringLiteral("actionWeightened"));
+        actionWeightened->setCheckable(true);
+        actionGrayscale = new QAction(MyPainterClass);
+        actionGrayscale->setObjectName(QStringLiteral("actionGrayscale"));
+        actionGrayscale->setCheckable(true);
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -167,6 +179,7 @@ public:
         menuFile->addAction(actionExit);
         menuEffects->addAction(actionRotate_left);
         menuEffects->addAction(actionRotate_right);
+        menuEffects->addAction(actionGrayscale);
 
         retranslateUi(MyPainterClass);
         QObject::connect(actionOpen, SIGNAL(triggered()), MyPainterClass, SLOT(ActionOpen()));
@@ -183,6 +196,7 @@ public:
         QObject::connect(actionKruznica, SIGNAL(triggered()), MyPainterClass, SLOT(kruznicamenu()));
         QObject::connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), MyPainterClass, SLOT(zmena_itemu()));
         QObject::connect(actionExit, SIGNAL(triggered()), MyPainterClass, SLOT(close()));
+        QObject::connect(actionGrayscale, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale()));
 
         QMetaObject::connectSlotsByName(MyPainterClass);
     } // setupUi
@@ -204,6 +218,9 @@ public:
         actionKruznica->setText(QApplication::translate("MyPainterClass", "Kruznica", Q_NULLPTR));
         actionverzia_1->setText(QApplication::translate("MyPainterClass", "verzia_1", Q_NULLPTR));
         actionExit->setText(QApplication::translate("MyPainterClass", "Exit", Q_NULLPTR));
+        actionAverage_algorithm->setText(QApplication::translate("MyPainterClass", "Average algorithm", Q_NULLPTR));
+        actionWeightened->setText(QApplication::translate("MyPainterClass", "Weightened", Q_NULLPTR));
+        actionGrayscale->setText(QApplication::translate("MyPainterClass", "Grayscale", Q_NULLPTR));
         groupBox->setTitle(QString());
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));

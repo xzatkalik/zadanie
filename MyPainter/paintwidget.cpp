@@ -142,6 +142,30 @@ void PaintWidget::RotateRight()
 	update();
 }
 
+void PaintWidget::grayscale()
+{
+//grayscale averge method
+	int a = 50;
+	if (!image.isGrayscale())
+	{
+#pragma omp parallel
+		for (int i = 0; i < image.width(); i++)
+		{
+			for (int j = 0; j < image.height(); j++)
+			{
+				QColor tmp = image.pixelColor(i, j);
+				int average = (tmp.red() + tmp.blue() + tmp.red()) / 3;
+				tmp.setBlue(average);
+				tmp.setRed(average);
+				tmp.setGreen(average);
+				image.setPixelColor(i, j, tmp);
+			}
+		}
+		
+		update();
+	}
+}
+
 void PaintWidget::clearImage()
 {
 	image.fill(qRgb(255, 255, 255));

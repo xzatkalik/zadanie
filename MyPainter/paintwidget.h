@@ -30,6 +30,9 @@ public:
 	void RotateLeft();
 	void RotateRight();
 
+	void grayscale();
+
+
 	bool isModified() const { return modified; }
 	QColor penColor() const { return myPenColor; }
 	int penWidth() const { return myPenWidth; }

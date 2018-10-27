@@ -32,6 +32,8 @@ public slots:
 
 	void zmena_itemu();
 
+	void grayscale();
+
 	
 
 private:

@@ -105,6 +105,7 @@
     </property>
     <addaction name="actionRotate_left"/>
     <addaction name="actionRotate_right"/>
+    <addaction name="actionGrayscale"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEffects"/>
@@ -181,6 +182,30 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAverage_algorithm">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Average algorithm</string>
+   </property>
+  </action>
+  <action name="actionWeightened">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Weightened</string>
+   </property>
+  </action>
+  <action name="actionGrayscale">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Grayscale</string>
    </property>
   </action>
  </widget>
@@ -416,6 +441,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionGrayscale</sender>
+   <signal>triggered()</signal>
+   <receiver>MyPainterClass</receiver>
+   <slot>grayscale()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ActionOpen()</slot>
@@ -425,5 +466,6 @@
   <slot>ActionLeft()</slot>
   <slot>ActionRight()</slot>
   <slot>zmena_itemu()</slot>
+  <slot>grayscale()</slot>
  </slots>
 </ui>

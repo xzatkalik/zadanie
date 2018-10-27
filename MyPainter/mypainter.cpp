@@ -10,8 +10,9 @@ MyPainter::MyPainter(QWidget *parent)
 
 MyPainter::~MyPainter()
 {
-	free(otvoreny);
-	otvorene_fronta.clear();
+	
+	/*free(otvoreny);
+	otvorene_fronta.clear();*/
 }
 
 void MyPainter::ActionOpen()
@@ -81,7 +82,21 @@ void MyPainter::zmena_itemu()
 
 //	paintWidget = otvorene_fronta[subor];
 	if (!fileName.isEmpty())
+	{
 		paintWidget.changeImage(fileName);
+		if (ui.actionGrayscale->isChecked())
+		{
+			paintWidget.grayscale();
+		}
+	}
 
+}
+
+void MyPainter::grayscale()
+{
+	if (ui.actionGrayscale->isChecked())
+	{
+		paintWidget.grayscale();
+	}
 }
 
