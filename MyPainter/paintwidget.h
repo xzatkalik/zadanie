@@ -11,6 +11,9 @@
 #include <algorithm>
 #include <QList>
 
+#include <omp.h>
+#include <thread>
+
 
 
 class PaintWidget : public QWidget
@@ -29,6 +32,8 @@ public:
 	
 	void RotateLeft();
 	void RotateRight();
+
+	void vypocet_grayscale();
 
 	void grayscale();
 

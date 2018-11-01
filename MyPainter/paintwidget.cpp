@@ -142,25 +142,39 @@ void PaintWidget::RotateRight()
 	update();
 }
 
+
+void PaintWidget::vypocet_grayscale()
+{
+	for (int i = 0; i < image.width(); i++)
+	{
+		for (int j = 0; j < image.height(); j++)
+		{
+			QColor tmp = image.pixelColor(i, j);
+			int average = (tmp.red() + tmp.blue() + tmp.red()) / 3;
+			tmp.setBlue(average);
+			tmp.setRed(average);
+			tmp.setGreen(average);
+			image.setPixelColor(i, j, tmp);
+
+			int th = omp_get_thread_num();
+			if (th > 0)
+			{
+
+			}
+		}
+	}
+}
+
 void PaintWidget::grayscale()
 {
 //grayscale averge method
 	int a = 50;
 	if (!image.isGrayscale())
 	{
-#pragma omp parallel
-		for (int i = 0; i < image.width(); i++)
-		{
-			for (int j = 0; j < image.height(); j++)
-			{
-				QColor tmp = image.pixelColor(i, j);
-				int average = (tmp.red() + tmp.blue() + tmp.red()) / 3;
-				tmp.setBlue(average);
-				tmp.setRed(average);
-				tmp.setGreen(average);
-				image.setPixelColor(i, j, tmp);
-			}
-		}
+//#pragma omp parallel for default(none)  
+		std::thread t1(vypocet_grayscale);
+
+		t1.join();
 		
 		update();
 	}

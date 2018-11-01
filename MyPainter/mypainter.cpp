@@ -1,5 +1,7 @@
 #include "mypainter.h"
 
+using namespace std;
+
 MyPainter::MyPainter(QWidget *parent)
 	: QMainWindow(parent)
 {
