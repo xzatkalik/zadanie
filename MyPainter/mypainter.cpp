@@ -86,7 +86,8 @@ void MyPainter::zmena_itemu()
 	if (!fileName.isEmpty())
 	{
 		paintWidget.changeImage(fileName);
-		this->grayscale();
+		//this->grayscale();
+		if(i_typ_grayscale>0) paintWidget.grayscale(i_typ_grayscale);
 	}
 
 }
@@ -103,8 +104,9 @@ void MyPainter::grayscale()
 		msgBox.addButton(tr("Weightened"), QMessageBox::NoRole);
 		////msgBox.setStandardButtons(QMessageBox::Average | QMessageBox::Discard | QMessageBox::Cancel);
 		//msgBox.setDefaultButton(QMessageBox::Save);
-		int ret = msgBox.exec();
-		
+		 i_typ_grayscale = msgBox.exec();
+		paintWidget.grayscale(i_typ_grayscale);
+
 		/*switch (ret) {
 		case 0:
 			paintWidget.grayscale();
@@ -120,6 +122,10 @@ void MyPainter::grayscale()
 		//std::thread t0(&PaintWidget::grayscale, &paintWidget);
 		
 		
+	}
+	else
+	{
+		i_typ_grayscale = -10;
 	}
 }
 

@@ -43,6 +43,8 @@ private:
 	PaintWidget *otvoreny;
 	QList<PaintWidget> otvorene_fronta;
 	QList<QString> otvorene_filenames;
+
+	int i_typ_grayscale = -10;
 	
 };
 

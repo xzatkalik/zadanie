@@ -167,15 +167,24 @@ void PaintWidget::vypocet_grayscale()
 
 void PaintWidget::grayscale(int typ)
 {
-//grayscale averge method
+
 	
 	if (!image.isGrayscale())
 	{
 //#pragma omp parallel for default(none)  
-		std::thread t1(&PaintWidget::vypocet_grayscale, this);
 
-		t1.join();
-		
+		switch(typ) {
+		case 0: {
+			std::thread t0(&PaintWidget::vypocet_grayscale, this);
+			t0.join();
+			break; }
+		case 1: {
+			std::thread t1(&PaintWidget::grayscale_vazeny, this);
+			t1.join();
+			break; }
+
+		}
+		  	
 		update();
 	}
 }
@@ -183,8 +192,8 @@ void PaintWidget::grayscale(int typ)
 void PaintWidget::grayscale_vazeny()
 {
 	//grayscale weightened method
-	if (!image.isGrayscale())
-	{
+	//if (!image.isGrayscale())
+	//{
 		for (int i = 0; i < image.width(); i++)
 		{
 			for (int j = 0; j < image.height(); j++)
@@ -204,8 +213,8 @@ void PaintWidget::grayscale_vazeny()
 			}
 		}
 
-		update();
-	}
+		//update();
+	//}
 }
 
 void PaintWidget::clearImage()
