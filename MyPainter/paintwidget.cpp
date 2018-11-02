@@ -60,6 +60,20 @@ bool PaintWidget::changeImage(const QString &fileName)
 	return true;
 }
 
+bool PaintWidget::closeImage()
+{
+	
+
+	otvorene_image.removeAt(opened);
+	otvorene_filename.removeAt(opened);
+	
+	opened = -1;
+	clearImage();
+
+	update();
+
+	return true;
+}
 
 
 bool PaintWidget::newImage(int x, int y)
@@ -156,11 +170,9 @@ void PaintWidget::vypocet_grayscale()
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-			int th = omp_get_thread_num();
-			if (th > 0)
-			{
 
-			}
+			std::thread::id main_thread_id = std::this_thread::get_id();
+
 		}
 	}
 }
@@ -172,10 +184,11 @@ void PaintWidget::grayscale(int typ)
 	if (!image.isGrayscale())
 	{
 //#pragma omp parallel for default(none)  
-
+		std::thread::id main_thread_id = std::this_thread::get_id();
 		switch(typ) {
 		case 0: {
 			std::thread t0(&PaintWidget::vypocet_grayscale, this);
+
 			t0.join();
 			break; }
 		case 1: {

@@ -14,7 +14,7 @@
    <string>Projekt</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="mypainter.qrc">
+   <iconset>
     <normaloff>:/newPrefix/resources/icon_application.jpg</normaloff>:/newPrefix/resources/icon_application.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -71,7 +71,7 @@
            <x>0</x>
            <y>0</y>
            <width>290</width>
-           <height>286</height>
+           <height>269</height>
           </rect>
          </property>
         </widget>
@@ -114,20 +114,36 @@
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
    <addaction name="actionGrayscale"/>
+   <addaction name="separator"/>
+   <addaction name="actionExit"/>
   </widget>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="mypainter.qrc">
+     <normaloff>:/newPrefix/resources/must_have_icon_set/Open/Open_48x48.png</normaloff>:/newPrefix/resources/must_have_icon_set/Open/Open_48x48.png</iconset>
+   </property>
    <property name="text">
     <string>Open</string>
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="mypainter.qrc">
+     <normaloff>:/newPrefix/resources/must_have_icon_set/Save/Save_48x48.png</normaloff>:/newPrefix/resources/must_have_icon_set/Save/Save_48x48.png</iconset>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -191,6 +207,10 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="mypainter.qrc">
+     <normaloff>:/newPrefix/resources/must_have_icon_set/Delete/Delete_48x48.png</normaloff>:/newPrefix/resources/must_have_icon_set/Delete/Delete_48x48.png</iconset>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -217,10 +237,15 @@
    </property>
    <property name="icon">
     <iconset resource="mypainter.qrc">
-     <normaloff>:/newPrefix/resources/icon_grayscale1.jpg</normaloff>:/newPrefix/resources/icon_grayscale1.jpg</iconset>
+     <normaloff>:/ikonky/resources/icon_grayscale1.jpg</normaloff>:/ikonky/resources/icon_grayscale1.jpg</iconset>
    </property>
    <property name="text">
     <string>Grayscale</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
    </property>
   </action>
  </widget>
@@ -469,6 +494,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>MyPainterClass</receiver>
+   <slot>vymaz_item()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ActionOpen()</slot>
@@ -479,5 +520,6 @@
   <slot>ActionRight()</slot>
   <slot>zmena_itemu()</slot>
   <slot>grayscale()</slot>
+  <slot>vymaz_item()</slot>
  </slots>
 </ui>

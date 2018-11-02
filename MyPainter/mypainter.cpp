@@ -92,14 +92,31 @@ void MyPainter::zmena_itemu()
 
 }
 
+void MyPainter::vymaz_item()
+{
+
+	
+
+	ui.listWidget->removeItemWidget(ui.listWidget->currentItem());
+
+
+	
+	paintWidget.closeImage();
+		
+
+}
+
 void MyPainter::grayscale()
 {
 	if (ui.actionGrayscale->isChecked())
 	{
 		
 		QMessageBox msgBox;
-		msgBox.setText("Choose algorithm type");
+		msgBox.setText("Choose algorithm type for grayscaling");
 		//msgBox.setInformativeText("Choose algorithm type");
+		//QPixmap exportSuccess(":/ikonky/resources/icon_grayscale1.jpg");
+		//msgBox.setIconPixmap(exportSuccess);
+		msgBox.setWindowTitle("Grayscale type");
 		msgBox.addButton(tr("Average"), QMessageBox::NoRole);
 		msgBox.addButton(tr("Weightened"), QMessageBox::NoRole);
 		msgBox.addButton(tr("Desaturation"), QMessageBox::NoRole);

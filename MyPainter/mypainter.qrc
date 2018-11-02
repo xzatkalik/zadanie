@@ -1,6 +1,11 @@
 <RCC>
-  <qresource prefix="newPrefix">
+  <qresource prefix="ikonky">
     <file>resources/icon_application.jpg</file>
     <file>resources/icon_grayscale1.jpg</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>resources/must_have_icon_set/Delete/Delete_48x48.png</file>
+    <file>resources/must_have_icon_set/Save/Save_48x48.png</file>
+    <file>resources/must_have_icon_set/Open/Open_48x48.png</file>
   </qresource>
 </RCC>

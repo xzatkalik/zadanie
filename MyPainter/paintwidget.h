@@ -25,6 +25,7 @@ public:
 
 	bool openImage(const QString &fileName);
 	bool changeImage(const QString & fileName);
+	bool closeImage();
 	bool newImage(int x, int y);
 	bool saveImage(const QString &fileName);
 	void setPenColor(const QColor &newColor);
@@ -71,7 +72,7 @@ private:
 	QList<QString> otvorene_filename;
 	QPoint lastPoint;
 
-	int opened;
+	int opened=-1;
 	
 
 	

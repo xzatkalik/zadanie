@@ -10,6 +10,8 @@
 #include <QListWidget>
 #include <QMap>
 
+#include <QPixmap>
+
 
 class MyPainter : public QMainWindow
 {
@@ -31,6 +33,7 @@ public slots:
 	void ActionRight();
 
 	void zmena_itemu();
+	void vymaz_item();
 
 	void grayscale();
 

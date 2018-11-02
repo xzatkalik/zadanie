@@ -48,6 +48,7 @@ public:
     QAction *actionAverage_algorithm;
     QAction *actionWeightened;
     QAction *actionGrayscale;
+    QAction *actionClose;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_3;
@@ -72,8 +73,14 @@ public:
         MyPainterClass->setWindowIcon(icon);
         actionOpen = new QAction(MyPainterClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/newPrefix/resources/must_have_icon_set/Open/Open_48x48.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionOpen->setIcon(icon1);
         actionSave = new QAction(MyPainterClass);
         actionSave->setObjectName(QStringLiteral("actionSave"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/newPrefix/resources/must_have_icon_set/Save/Save_48x48.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSave->setIcon(icon2);
         actionClear = new QAction(MyPainterClass);
         actionClear->setObjectName(QStringLiteral("actionClear"));
         actionNew = new QAction(MyPainterClass);
@@ -99,6 +106,9 @@ public:
         actionverzia_1->setCheckable(true);
         actionExit = new QAction(MyPainterClass);
         actionExit->setObjectName(QStringLiteral("actionExit"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/newPrefix/resources/must_have_icon_set/Delete/Delete_48x48.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionExit->setIcon(icon3);
         actionAverage_algorithm = new QAction(MyPainterClass);
         actionAverage_algorithm->setObjectName(QStringLiteral("actionAverage_algorithm"));
         actionAverage_algorithm->setCheckable(true);
@@ -108,9 +118,11 @@ public:
         actionGrayscale = new QAction(MyPainterClass);
         actionGrayscale->setObjectName(QStringLiteral("actionGrayscale"));
         actionGrayscale->setCheckable(true);
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/newPrefix/resources/icon_grayscale1.jpg"), QSize(), QIcon::Normal, QIcon::Off);
-        actionGrayscale->setIcon(icon1);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/ikonky/resources/icon_grayscale1.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        actionGrayscale->setIcon(icon4);
+        actionClose = new QAction(MyPainterClass);
+        actionClose->setObjectName(QStringLiteral("actionClose"));
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -151,7 +163,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 286));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 269));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -173,6 +185,7 @@ public:
         MyPainterClass->setStatusBar(statusBar);
         toolBar = new QToolBar(MyPainterClass);
         toolBar->setObjectName(QStringLiteral("toolBar"));
+        toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
         MyPainterClass->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menuBar->addAction(menuFile->menuAction());
@@ -183,7 +196,12 @@ public:
         menuEffects->addAction(actionRotate_left);
         menuEffects->addAction(actionRotate_right);
         menuEffects->addAction(actionGrayscale);
+        toolBar->addAction(actionOpen);
+        toolBar->addAction(actionSave);
+        toolBar->addSeparator();
         toolBar->addAction(actionGrayscale);
+        toolBar->addSeparator();
+        toolBar->addAction(actionExit);
 
         retranslateUi(MyPainterClass);
         QObject::connect(actionOpen, SIGNAL(triggered()), MyPainterClass, SLOT(ActionOpen()));
@@ -201,6 +219,7 @@ public:
         QObject::connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), MyPainterClass, SLOT(zmena_itemu()));
         QObject::connect(actionExit, SIGNAL(triggered()), MyPainterClass, SLOT(close()));
         QObject::connect(actionGrayscale, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale()));
+        QObject::connect(actionClose, SIGNAL(triggered()), MyPainterClass, SLOT(vymaz_item()));
 
         QMetaObject::connectSlotsByName(MyPainterClass);
     } // setupUi
@@ -225,6 +244,7 @@ public:
         actionAverage_algorithm->setText(QApplication::translate("MyPainterClass", "Average algorithm", Q_NULLPTR));
         actionWeightened->setText(QApplication::translate("MyPainterClass", "Weightened", Q_NULLPTR));
         actionGrayscale->setText(QApplication::translate("MyPainterClass", "Grayscale", Q_NULLPTR));
+        actionClose->setText(QApplication::translate("MyPainterClass", "Close", Q_NULLPTR));
         groupBox->setTitle(QString());
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));
