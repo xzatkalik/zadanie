@@ -86,10 +86,7 @@ void MyPainter::zmena_itemu()
 	if (!fileName.isEmpty())
 	{
 		paintWidget.changeImage(fileName);
-		if (ui.actionGrayscale->isChecked())
-		{
-			paintWidget.grayscale();
-		}
+		this->grayscale();
 	}
 
 }
@@ -98,7 +95,31 @@ void MyPainter::grayscale()
 {
 	if (ui.actionGrayscale->isChecked())
 	{
-		paintWidget.grayscale();
+		
+		QMessageBox msgBox;
+		msgBox.setText("Choose algorithm type");
+		//msgBox.setInformativeText("Choose algorithm type");
+		msgBox.addButton(tr("Average"), QMessageBox::NoRole);
+		msgBox.addButton(tr("Weightened"), QMessageBox::NoRole);
+		////msgBox.setStandardButtons(QMessageBox::Average | QMessageBox::Discard | QMessageBox::Cancel);
+		//msgBox.setDefaultButton(QMessageBox::Save);
+		int ret = msgBox.exec();
+		
+		/*switch (ret) {
+		case 0:
+			paintWidget.grayscale();
+			break;
+		case 1:
+			std::thread t0(&PaintWidget::grayscale_vazeny, &paintWidget);
+			//paintWidget.grayscale_vazeny();
+			t0.join();
+			break;
+
+		}*/
+
+		//std::thread t0(&PaintWidget::grayscale, &paintWidget);
+		
+		
 	}
 }
 

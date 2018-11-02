@@ -165,17 +165,45 @@ void PaintWidget::vypocet_grayscale()
 	}
 }
 
-void PaintWidget::grayscale()
+void PaintWidget::grayscale(int typ)
 {
 //grayscale averge method
-	int a = 50;
+	
 	if (!image.isGrayscale())
 	{
 //#pragma omp parallel for default(none)  
-		std::thread t1(vypocet_grayscale);
+		std::thread t1(&PaintWidget::vypocet_grayscale, this);
 
 		t1.join();
 		
+		update();
+	}
+}
+
+void PaintWidget::grayscale_vazeny()
+{
+	//grayscale weightened method
+	if (!image.isGrayscale())
+	{
+		for (int i = 0; i < image.width(); i++)
+		{
+			for (int j = 0; j < image.height(); j++)
+			{
+				QColor tmp = image.pixelColor(i, j);
+				int average = (int)((0.3*tmp.red() + 0.59*tmp.blue() + 0.11*tmp.red()) + 0.5);
+				tmp.setBlue(average);
+				tmp.setRed(average);
+				tmp.setGreen(average);
+				image.setPixelColor(i, j, tmp);
+
+				int th = omp_get_thread_num();
+				if (th > 0)
+				{
+
+				}
+			}
+		}
+
 		update();
 	}
 }

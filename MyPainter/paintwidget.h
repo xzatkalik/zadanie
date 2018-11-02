@@ -34,8 +34,10 @@ public:
 	void RotateRight();
 
 	void vypocet_grayscale();
+	void grayscale(int typ);
+	//void grayscale();
 
-	void grayscale();
+	void grayscale_vazeny();
 
 
 	bool isModified() const { return modified; }
