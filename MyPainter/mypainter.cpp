@@ -102,6 +102,7 @@ void MyPainter::grayscale()
 		//msgBox.setInformativeText("Choose algorithm type");
 		msgBox.addButton(tr("Average"), QMessageBox::NoRole);
 		msgBox.addButton(tr("Weightened"), QMessageBox::NoRole);
+		msgBox.addButton(tr("Desaturation"), QMessageBox::NoRole);
 		////msgBox.setStandardButtons(QMessageBox::Average | QMessageBox::Discard | QMessageBox::Cancel);
 		//msgBox.setDefaultButton(QMessageBox::Save);
 		 i_typ_grayscale = msgBox.exec();

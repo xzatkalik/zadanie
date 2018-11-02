@@ -182,6 +182,11 @@ void PaintWidget::grayscale(int typ)
 			std::thread t1(&PaintWidget::grayscale_vazeny, this);
 			t1.join();
 			break; }
+		case 2: {
+			std::thread t1(&PaintWidget::grayscale_desaturation, this);
+			t1.join();
+			break; }
+
 
 		}
 		  	
@@ -215,6 +220,36 @@ void PaintWidget::grayscale_vazeny()
 
 		//update();
 	//}
+}
+
+void PaintWidget::grayscale_desaturation()
+{
+	
+	for (int i = 0; i < image.width(); i++)
+	{
+		for (int j = 0; j < image.height(); j++)
+		{
+			QColor tmp = image.pixelColor(i, j);
+			int max = std::max(tmp.red(), tmp.blue());
+				max = std::max(max, tmp.red());
+			int min = std::min(tmp.red(), tmp.blue());
+				min = std::min(max, tmp.red());
+			int average = (int)(((max+min)/2 ) + 0.5);
+			tmp.setBlue(average);
+			tmp.setRed(average);
+			tmp.setGreen(average);
+			image.setPixelColor(i, j, tmp);
+
+			int th = omp_get_thread_num();
+			if (th > 0)
+			{
+
+			}
+		}
+	}
+
+	//update();
+//}
 }
 
 void PaintWidget::clearImage()

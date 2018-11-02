@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="MyPainter">
-    </qresource>
+  <qresource prefix="newPrefix">
+    <file>resources/icon_application.jpg</file>
+    <file>resources/icon_grayscale1.jpg</file>
+  </qresource>
 </RCC>

@@ -39,6 +39,8 @@ public:
 
 	void grayscale_vazeny();
 
+	void grayscale_desaturation();
+
 
 	bool isModified() const { return modified; }
 	QColor penColor() const { return myPenColor; }

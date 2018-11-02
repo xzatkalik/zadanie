@@ -22,6 +22,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -59,6 +60,7 @@ public:
     QMenu *menuFile;
     QMenu *menuEffects;
     QStatusBar *statusBar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MyPainterClass)
     {
@@ -66,12 +68,7 @@ public:
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
         MyPainterClass->resize(576, 383);
         QIcon icon;
-        QString iconThemeName = QStringLiteral(":/lan.svg");
-        if (QIcon::hasThemeIcon(iconThemeName)) {
-            icon = QIcon::fromTheme(iconThemeName);
-        } else {
-            icon.addFile(QStringLiteral(":/lan.svg"), QSize(), QIcon::Normal, QIcon::On);
-        }
+        icon.addFile(QStringLiteral(":/newPrefix/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         MyPainterClass->setWindowIcon(icon);
         actionOpen = new QAction(MyPainterClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -111,6 +108,9 @@ public:
         actionGrayscale = new QAction(MyPainterClass);
         actionGrayscale->setObjectName(QStringLiteral("actionGrayscale"));
         actionGrayscale->setCheckable(true);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/newPrefix/resources/icon_grayscale1.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        actionGrayscale->setIcon(icon1);
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -151,7 +151,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 320));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 286));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -171,6 +171,9 @@ public:
         statusBar = new QStatusBar(MyPainterClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MyPainterClass->setStatusBar(statusBar);
+        toolBar = new QToolBar(MyPainterClass);
+        toolBar->setObjectName(QStringLiteral("toolBar"));
+        MyPainterClass->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEffects->menuAction());
@@ -180,6 +183,7 @@ public:
         menuEffects->addAction(actionRotate_left);
         menuEffects->addAction(actionRotate_right);
         menuEffects->addAction(actionGrayscale);
+        toolBar->addAction(actionGrayscale);
 
         retranslateUi(MyPainterClass);
         QObject::connect(actionOpen, SIGNAL(triggered()), MyPainterClass, SLOT(ActionOpen()));
@@ -224,6 +228,7 @@ public:
         groupBox->setTitle(QString());
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));
+        toolBar->setWindowTitle(QApplication::translate("MyPainterClass", "toolBar", Q_NULLPTR));
     } // retranslateUi
 
 };
