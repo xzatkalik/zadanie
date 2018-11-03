@@ -14,8 +14,8 @@
    <string>Projekt</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/newPrefix/resources/icon_application.jpg</normaloff>:/newPrefix/resources/icon_application.jpg</iconset>
+   <iconset resource="mypainter.qrc">
+    <normaloff>:/ikonky/resources/icon_application.jpg</normaloff>:/ikonky/resources/icon_application.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">

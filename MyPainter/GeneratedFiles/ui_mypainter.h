@@ -69,7 +69,7 @@ public:
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
         MyPainterClass->resize(576, 383);
         QIcon icon;
-        icon.addFile(QStringLiteral(":/newPrefix/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/ikonky/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         MyPainterClass->setWindowIcon(icon);
         actionOpen = new QAction(MyPainterClass);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));

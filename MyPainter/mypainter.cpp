@@ -1,6 +1,8 @@
 #include "mypainter.h"
 
 using namespace std;
+using namespace std::this_thread;
+using namespace std::chrono;
 
 MyPainter::MyPainter(QWidget *parent)
 	: QMainWindow(parent)
@@ -86,8 +88,9 @@ void MyPainter::zmena_itemu()
 	if (!fileName.isEmpty())
 	{
 		paintWidget.changeImage(fileName);
-		//this->grayscale();
+		//paintWidget.update();
 		if(i_typ_grayscale>0) paintWidget.grayscale(i_typ_grayscale);
+		//paintWidget.update();
 	}
 
 }

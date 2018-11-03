@@ -29,6 +29,11 @@ bool PaintWidget::openImage(const QString &fileName)
 		return false;
 	}
 	else {
+		//ulozenie aktualneho obrazku
+		if (opened > -1) otvorene_image[opened] = image;
+
+		
+		//natiahnutie noveho
 		QSize newSize = loadedImage.size();
 		resizeImage(&loadedImage, newSize);
 		image = loadedImage;
