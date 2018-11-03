@@ -89,7 +89,11 @@ void MyPainter::zmena_itemu()
 	{
 		paintWidget.changeImage(fileName);
 		//paintWidget.update();
-		if(i_typ_grayscale>0) paintWidget.grayscale(i_typ_grayscale);
+		if (i_typ_grayscale > 0) { 
+			//std::thread t0(&PaintWidget::grayscale, &paintWidget, i_typ_grayscale);
+				paintWidget.grayscale(i_typ_grayscale); 
+				//t0.join();
+		}
 		//paintWidget.update();
 	}
 
