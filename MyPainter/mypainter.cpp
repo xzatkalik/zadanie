@@ -31,6 +31,10 @@ void MyPainter::ActionOpen()
 		//otvoreny->openImage(fileName);
 		
 	if(otvorilo) ui.listWidget->addItem(fileName);
+
+	if (i_typ_grayscale >= 0) {
+		paintWidget.grayscale(i_typ_grayscale);
+	}
 	
 }
 	
@@ -89,7 +93,7 @@ void MyPainter::zmena_itemu()
 	{
 		paintWidget.changeImage(fileName);
 		//paintWidget.update();
-		if (i_typ_grayscale > 0) { 
+		if (i_typ_grayscale >= 0) { 
 			//std::thread t0(&PaintWidget::grayscale, &paintWidget, i_typ_grayscale);
 				paintWidget.grayscale(i_typ_grayscale); 
 				//t0.join();
