@@ -176,7 +176,7 @@ void PaintWidget::vypocet_grayscale()
 			image.setPixelColor(i, j, tmp);
 
 
-			std::thread::id main_thread_id = std::this_thread::get_id();
+			//std::thread::id main_thread_id = std::this_thread::get_id();
 
 		}
 	}
@@ -189,7 +189,7 @@ void PaintWidget::grayscale(int typ)
 	if (!image.isGrayscale())
 	{
 //#pragma omp parallel for default(none)  
-		std::thread::id main_thread_id = std::this_thread::get_id();
+		//std::thread::id main_thread_id = std::this_thread::get_id();
 		switch(typ) {
 		case 0: {
 			std::thread t0(&PaintWidget::vypocet_grayscale, this);

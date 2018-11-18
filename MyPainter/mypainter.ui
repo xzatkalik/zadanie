@@ -105,6 +105,8 @@
     <addaction name="actionRotate_left"/>
     <addaction name="actionRotate_right"/>
     <addaction name="actionGrayscale"/>
+    <addaction name="actionGrayscale_Weightened"/>
+    <addaction name="actionGrayscale_Desaturation"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEffects"/>
@@ -127,6 +129,8 @@
    <addaction name="actionSave"/>
    <addaction name="separator"/>
    <addaction name="actionGrayscale"/>
+   <addaction name="actionGrayscale_Weightened"/>
+   <addaction name="actionGrayscale_Desaturation"/>
    <addaction name="separator"/>
    <addaction name="actionExit"/>
   </widget>
@@ -240,12 +244,36 @@
      <normaloff>:/ikonky/resources/icon_grayscale1.jpg</normaloff>:/ikonky/resources/icon_grayscale1.jpg</iconset>
    </property>
    <property name="text">
-    <string>Grayscale</string>
+    <string>Grayscale Average</string>
    </property>
   </action>
   <action name="actionClose">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionGrayscale_Weightened">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="mypainter.qrc">
+     <normaloff>:/ikonky/resources/icon_grayscale1.jpg</normaloff>:/ikonky/resources/icon_grayscale1.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Grayscale Weightened</string>
+   </property>
+  </action>
+  <action name="actionGrayscale_Desaturation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="mypainter.qrc">
+     <normaloff>:/ikonky/resources/icon_grayscale1.jpg</normaloff>:/ikonky/resources/icon_grayscale1.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Grayscale Desaturation</string>
    </property>
   </action>
  </widget>
