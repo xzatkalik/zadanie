@@ -5,16 +5,22 @@ using namespace std::this_thread;
 using namespace std::chrono;
 
 MyPainter::MyPainter(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), ui(new Ui::MyPainterClass)
 {
-	ui.setupUi(this);
-	ui.scrollArea->setWidget(&this->paintWidget);
-	ui.scrollArea->setBackgroundRole(QPalette::Dark);
+	p_histogramWidget = new ScribbleArea();
+	paintWidget = new PaintWidget(ui, p_histogramWidget);
+	
+	
 
-	ui.scrollAreaHistogram->setWidget(&this->histogramWidget);
-	ui.scrollAreaHistogram->setBackgroundRole(QPalette::Dark);
+	ui->setupUi(this);
+	ui->scrollArea->setWidget(this->paintWidget);
+	ui->scrollArea->setBackgroundRole(QPalette::Dark);
 
-	histogramWidget.clearImage();
+	
+	//ui->scrollAreaHistogram->setWidget(&this->histogramWidget);
+	ui->scrollAreaHistogram->setWidget(this->p_histogramWidget);
+	ui->scrollAreaHistogram->setBackgroundRole(QPalette::Dark);
+	//histogramWidget.clearImage();
 }
 
 MyPainter::~MyPainter()
@@ -24,11 +30,12 @@ MyPainter::~MyPainter()
 	otvorene_fronta.clear();*/
 }
 
+/*
 void MyPainter:::resizeEvent(QResizeEvent* event)
 {
 	QMainWindow::resizeEvent(event);
 	// Your code here.
-}
+}*/
 
 
 void MyPainter::ActionOpen()
@@ -39,13 +46,13 @@ void MyPainter::ActionOpen()
 
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "image files (*.png *.jpg *.bmp)");
 	if (!fileName.isEmpty())
-		 otvorilo = paintWidget.openImage(fileName);
+		 otvorilo = paintWidget->openImage(fileName);
 		//otvoreny->openImage(fileName);
 		
-	if(otvorilo) ui.listWidget->addItem(fileName);
+	if(otvorilo) ui->listWidget->addItem(fileName);
 
 	if (i_typ_grayscale >= 0) {
-		paintWidget.grayscale(i_typ_grayscale);
+		paintWidget->grayscale(i_typ_grayscale);
 	}
 	
 }
@@ -57,18 +64,18 @@ void MyPainter::ActionSave()
 		return;
 	}
 	else {
-		paintWidget.saveImage(fileName);
+		paintWidget->saveImage(fileName);
 	}
 }
 
 void MyPainter::EffectClear()
 {
-	paintWidget.clearImage();
+	paintWidget->clearImage();
 }
 
 void MyPainter::ActionNew()
 {
-	paintWidget.newImage(800, 600);
+	paintWidget->newImage(800, 600);
 }
 
 void MyPainter::ActionLeft()
@@ -76,7 +83,7 @@ void MyPainter::ActionLeft()
 	QMessageBox mbox;
 	QElapsedTimer timer;
 	timer.start();
-	paintWidget.RotateLeft();
+	paintWidget->RotateLeft();
 	/*QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
 	mbox.setText(text);
 	mbox.exec();*/
@@ -87,7 +94,7 @@ void MyPainter::ActionRight()
 	QMessageBox mbox;
 	QElapsedTimer timer;
 	timer.start();
-	paintWidget.RotateRight();
+	paintWidget->RotateRight();
 	/*QString text = "The operation took " + QString::number(timer.nsecsElapsed() / 1000000.0) + " milliseconds";
 	mbox.setText(text);
 	mbox.exec();*/
@@ -96,18 +103,18 @@ void MyPainter::ActionRight()
 void MyPainter::zmena_itemu()
 {
 
-	QString fileName = ui.listWidget->currentItem()->text();
+	QString fileName = ui->listWidget->currentItem()->text();
 
 
 
 //	paintWidget = otvorene_fronta[subor];
 	if (!fileName.isEmpty())
 	{
-		paintWidget.changeImage(fileName);
+		paintWidget->changeImage(fileName);
 		//paintWidget.update();
 		if (i_typ_grayscale >= 0) { 
 			//std::thread t0(&PaintWidget::grayscale, &paintWidget, i_typ_grayscale);
-				paintWidget.grayscale(i_typ_grayscale); 
+				paintWidget->grayscale(i_typ_grayscale);
 				//t0.join();
 		}
 		//paintWidget.update();
@@ -120,18 +127,18 @@ void MyPainter::vymaz_item()
 
 	
 
-	ui.listWidget->removeItemWidget(ui.listWidget->currentItem());
+	ui->listWidget->removeItemWidget(ui->listWidget->currentItem());
 
 
 	
-	paintWidget.closeImage();
+	paintWidget->closeImage();
 		
 
 }
 
 void MyPainter::grayscale()
 {
-	if (ui.actionGrayscale->isChecked())
+	if (ui->actionGrayscale->isChecked())
 	{
 		
 		QMessageBox msgBox;
@@ -146,7 +153,7 @@ void MyPainter::grayscale()
 		////msgBox.setStandardButtons(QMessageBox::Average | QMessageBox::Discard | QMessageBox::Cancel);
 		//msgBox.setDefaultButton(QMessageBox::Save);
 		 i_typ_grayscale = msgBox.exec();
-		paintWidget.grayscale(i_typ_grayscale);
+		paintWidget->grayscale(i_typ_grayscale);
 
 		/*switch (ret) {
 		case 0:
@@ -172,43 +179,43 @@ void MyPainter::grayscale()
 
 void MyPainter::grayscale_ave()
 {
-	if (ui.actionGrayscale->isChecked())
+	if (ui->actionGrayscale->isChecked())
 	{
 		
-		paintWidget.grayscale(0);
+		paintWidget->grayscale(0);
 			
 	}
 	else
 	{
-		paintWidget.grayscale_uncheck();
+		paintWidget->grayscale_uncheck();
 	}
 }
 
 void MyPainter::grayscale_des()
 {
-	if (ui.actionGrayscale_Desaturation->isChecked())
+	if (ui->actionGrayscale_Desaturation->isChecked())
 	{
 
-		paintWidget.grayscale(2);
+		paintWidget->grayscale(2);
 
 	}
 	else
 	{
-		paintWidget.grayscale_uncheck();
+		paintWidget->grayscale_uncheck();
 	}
 }
 
 void MyPainter::grayscale_wei()
 {
-	if (ui.actionGrayscale_Weightened->isChecked())
+	if (ui->actionGrayscale_Weightened->isChecked())
 	{
 
-		paintWidget.grayscale(1);
+		paintWidget->grayscale(1);
 
 	}
 	else
 	{
-		paintWidget.grayscale_uncheck();
+		paintWidget->grayscale_uncheck();
 	}
 }
 

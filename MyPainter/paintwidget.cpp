@@ -1,7 +1,7 @@
 #include "paintwidget.h"
 
 
-PaintWidget::PaintWidget(QWidget *parent)
+/*PaintWidget::PaintWidget(QWidget *parent)
 	: QWidget(parent)
 {
 	setAttribute(Qt::WA_StaticContents);
@@ -11,6 +11,35 @@ PaintWidget::PaintWidget(QWidget *parent)
 	myPenColor = Qt::blue;
 
 	
+	
+}*/
+
+PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent)
+	: QWidget(parent)
+{
+	ui = parentUI;
+
+	setAttribute(Qt::WA_StaticContents);
+	modified = false;
+	painting = false;
+	myPenWidth = 1;
+	myPenColor = Qt::blue;
+
+	
+}
+
+PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget, QWidget *parent)
+	: QWidget(parent)
+{
+	ui = parentUI;
+
+	setAttribute(Qt::WA_StaticContents);
+	modified = false;
+	painting = false;
+	myPenWidth = 1;
+	myPenColor = Qt::blue;
+
+	p_histogram = histoWidget;
 }
 
 bool PaintWidget::openImage(const QString &fileName)
@@ -49,6 +78,9 @@ bool PaintWidget::openImage(const QString &fileName)
 		this->setMinimumSize(image.size());
 		modified = false;
 		update();
+
+		p_histogram->rataj_histogram(&image);
+
 		return true;
 	}
 }

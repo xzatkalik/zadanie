@@ -4,7 +4,12 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mypainter.h"
 #include "paintwidget.h"
+
+
 #include "HistogramWidget.h"
+//#include "ScribbleArea.h"
+
+
 #include <QElapsedTimer>
 
 #include <QListView>
@@ -22,7 +27,7 @@ public:
 	MyPainter(QWidget *parent = 0);
 	~MyPainter();
 
-	
+	ScribbleArea *p_histogramWidget;
 
 public slots:
 	void ActionOpen();
@@ -46,9 +51,16 @@ public slots:
 	
 
 private:
-	Ui::MyPainterClass ui;
-	PaintWidget paintWidget;
-	HistogramWidget histogramWidget;
+	Ui::MyPainterClass *ui;
+	PaintWidget *paintWidget;
+
+	ScribbleArea histogramWidget;
+	
+
+	//PaintWidget paintWidget = PaintWidget(&histogramWidget,this);
+	//HistogramWidget histogramWidget;
+	
+	
 
 	PaintWidget *otvoreny;
 	QList<PaintWidget> otvorene_fronta;

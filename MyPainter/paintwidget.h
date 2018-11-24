@@ -15,6 +15,9 @@
 #include <thread>
 #include <chrono>
 
+#include "ScribbleArea.h"
+#include"ui_mypainter.h"
+
 
 
 class PaintWidget : public QWidget
@@ -22,7 +25,13 @@ class PaintWidget : public QWidget
 	Q_OBJECT
 
 public:
-	PaintWidget(QWidget *parent = 0);
+	//PaintWidget(QWidget *parent = 0);
+
+	PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent = 0);
+
+	PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget, QWidget *parent = 0);
+
+
 
 	bool openImage(const QString &fileName);
 	bool changeImage(const QString & fileName);
@@ -61,6 +70,10 @@ protected:
 	void mouseDoubleClickEvent(QMouseEvent *event);
 
 private:
+	Ui::MyPainterClass *ui;
+	ScribbleArea *p_histogram;
+
+
 	void drawLineTo(const QPoint &endPoint);
 	void resizeImage(QImage *image, const QSize &newSize);
 	int selectKth(int* data, int s, int e, int k);

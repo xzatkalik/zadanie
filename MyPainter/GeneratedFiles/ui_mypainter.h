@@ -69,7 +69,7 @@ public:
     {
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
-        MyPainterClass->resize(576, 383);
+        MyPainterClass->resize(552, 440);
         QIcon icon;
         icon.addFile(QStringLiteral(":/ikonky/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         MyPainterClass->setWindowIcon(icon);
@@ -158,7 +158,7 @@ public:
         scrollAreaHistogram->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 272, 71));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 260, 128));
         scrollAreaHistogram->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_3->addWidget(scrollAreaHistogram);
@@ -176,7 +176,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 272, 269));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 260, 326));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -187,7 +187,7 @@ public:
         MyPainterClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MyPainterClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 576, 21));
+        menuBar->setGeometry(QRect(0, 0, 552, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEffects = new QMenu(menuBar);
