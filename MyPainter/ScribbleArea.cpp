@@ -146,15 +146,43 @@ void ScribbleArea::cisti_pocetnosti()
 	}
 }
 
+
+
 void ScribbleArea::najdi_maxima()
 {
 	for (int i = 0; i < 256; i++)
 	{
-		if (pocetnost_red[i] > max_red) max_red = pocetnost_red[i];
-		if (pocetnost_green[i] > max_green) max_green = pocetnost_green[i];
-		if (pocetnost_blue[i] > max_blue) max_blue = pocetnost_blue[i];
-	
+		if (pocetnost_red[i] > max) max = pocetnost_red[i];
+		if (pocetnost_green[i] > max) max = pocetnost_green[i];
+		if (pocetnost_blue[i] > max) max = pocetnost_blue[i];
+
 	}
+}
+
+void ScribbleArea::kresli_ciaru(QPainter * platno, int * pocetnosti)
+{
+	int newWidth = width();
+	int newHeight = height();
+	int os_y = newHeight;
+
+	double krok = (double)newWidth / (double)256 + 0.5;
+
+	bod aktualny;
+	bod predosly;
+
+	double ykrok = ((double)newHeight / (double)max);
+
+	predosly.x = 0;
+	predosly.y = (os_y - pocetnosti[0] * ykrok);
+
+	for (int i = 1; i < 256; i++)
+	{
+		aktualny.x = (predosly.x + krok);
+		aktualny.y = (os_y - pocetnosti[i] * ykrok);
+		platno->drawLine(QPoint(predosly.x + 0.5, predosly.y + 0.5), QPoint(aktualny.x + 0.5, aktualny.y + 0.5));
+		predosly = aktualny;
+	}
+
 }
 
 bool ScribbleArea::rataj_histogram(QImage * zdroj)
@@ -185,39 +213,21 @@ bool ScribbleArea::rataj_histogram(QImage * zdroj)
 void ScribbleArea::kresli_histogram()
 {
 	clearImage();
-
-	int newWidth = width();
-	int newHeight = height();
-	int os_y = newHeight;
-
-	double krok = (double)newWidth / (double)256;
+	
 		
 	QColor PenColor;
 	PenColor.setRgb(255, 0, 0);
 	QPainter painter(&image);
 	painter.setPen(QPen(PenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-	QPoint aktualny;
-	QPoint predosly;
-	
-	int max = max_red;
-	double ykrok = ((double)newHeight / (double)max) ;
+	kresli_ciaru(&painter, pocetnost_red);
 
-	predosly.setX(0);
-	predosly.setY(os_y - pocetnost_red[0]*ykrok);
+	painter.setPen(QPen(QColor(0,255,0), myPenWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+	kresli_ciaru(&painter, pocetnost_green);
 
-	for (int i = 1; i < 256; i++)
-	{
-		aktualny.setX(predosly.x() + krok);
-		aktualny.setY(os_y - pocetnost_red[i] * ykrok);
-		painter.drawLine(predosly, aktualny);
-		predosly = aktualny;
-	}
+	painter.setPen(QPen(QColor(0, 0,255), myPenWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+	kresli_ciaru(&painter, pocetnost_blue);
 
-
-
-
-	resizeImage(&image, QSize(newWidth, newHeight));
 	update();
 }
 

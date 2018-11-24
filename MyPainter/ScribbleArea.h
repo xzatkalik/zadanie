@@ -5,6 +5,11 @@
 #include <QtWidgets>
 #include <QMessageBox>
 
+struct bod {
+	double x;
+	double y;
+	
+};
 
 class ScribbleArea : public QWidget
 {
@@ -51,11 +56,12 @@ private:
 	int pocetnost_green[256];
 	int pocetnost_blue[256];
 
-	int max_red = 0;
-	int max_green = 0;
-	int max_blue = 0;
+	int max = 0;
+	
 
 	void cisti_pocetnosti();
 	void najdi_maxima();
+
+	void kresli_ciaru(QPainter *platno, int *pocetnosti);
 
 };
