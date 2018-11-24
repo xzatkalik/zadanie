@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QListWidget>
@@ -49,11 +48,14 @@ public:
     QAction *actionWeightened;
     QAction *actionGrayscale;
     QAction *actionClose;
+    QAction *actionGrayscale_Weightened;
+    QAction *actionGrayscale_Desaturation;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_3;
     QListWidget *listWidget;
-    QGroupBox *groupBox;
+    QScrollArea *scrollAreaHistogram;
+    QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents_3;
@@ -123,6 +125,14 @@ public:
         actionGrayscale->setIcon(icon4);
         actionClose = new QAction(MyPainterClass);
         actionClose->setObjectName(QStringLiteral("actionClose"));
+        actionGrayscale_Weightened = new QAction(MyPainterClass);
+        actionGrayscale_Weightened->setObjectName(QStringLiteral("actionGrayscale_Weightened"));
+        actionGrayscale_Weightened->setCheckable(true);
+        actionGrayscale_Weightened->setIcon(icon4);
+        actionGrayscale_Desaturation = new QAction(MyPainterClass);
+        actionGrayscale_Desaturation->setObjectName(QStringLiteral("actionGrayscale_Desaturation"));
+        actionGrayscale_Desaturation->setCheckable(true);
+        actionGrayscale_Desaturation->setIcon(icon4);
         centralWidget = new QWidget(MyPainterClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -143,12 +153,15 @@ public:
 
         verticalLayout_3->addWidget(listWidget);
 
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy);
+        scrollAreaHistogram = new QScrollArea(centralWidget);
+        scrollAreaHistogram->setObjectName(QStringLiteral("scrollAreaHistogram"));
+        scrollAreaHistogram->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 272, 71));
+        scrollAreaHistogram->setWidget(scrollAreaWidgetContents);
 
-        verticalLayout_3->addWidget(groupBox);
+        verticalLayout_3->addWidget(scrollAreaHistogram);
 
 
         horizontalLayout_2->addLayout(verticalLayout_3);
@@ -163,7 +176,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 290, 269));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 272, 269));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -196,10 +209,14 @@ public:
         menuEffects->addAction(actionRotate_left);
         menuEffects->addAction(actionRotate_right);
         menuEffects->addAction(actionGrayscale);
+        menuEffects->addAction(actionGrayscale_Weightened);
+        menuEffects->addAction(actionGrayscale_Desaturation);
         toolBar->addAction(actionOpen);
         toolBar->addAction(actionSave);
         toolBar->addSeparator();
         toolBar->addAction(actionGrayscale);
+        toolBar->addAction(actionGrayscale_Weightened);
+        toolBar->addAction(actionGrayscale_Desaturation);
         toolBar->addSeparator();
         toolBar->addAction(actionExit);
 
@@ -218,8 +235,10 @@ public:
         QObject::connect(actionKruznica, SIGNAL(triggered()), MyPainterClass, SLOT(kruznicamenu()));
         QObject::connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), MyPainterClass, SLOT(zmena_itemu()));
         QObject::connect(actionExit, SIGNAL(triggered()), MyPainterClass, SLOT(close()));
-        QObject::connect(actionGrayscale, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale()));
+        QObject::connect(actionGrayscale, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale_ave()));
         QObject::connect(actionClose, SIGNAL(triggered()), MyPainterClass, SLOT(vymaz_item()));
+        QObject::connect(actionGrayscale_Desaturation, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale_des()));
+        QObject::connect(actionGrayscale_Weightened, SIGNAL(triggered()), MyPainterClass, SLOT(grayscale_wei()));
 
         QMetaObject::connectSlotsByName(MyPainterClass);
     } // setupUi
@@ -243,9 +262,10 @@ public:
         actionExit->setText(QApplication::translate("MyPainterClass", "Exit", Q_NULLPTR));
         actionAverage_algorithm->setText(QApplication::translate("MyPainterClass", "Average algorithm", Q_NULLPTR));
         actionWeightened->setText(QApplication::translate("MyPainterClass", "Weightened", Q_NULLPTR));
-        actionGrayscale->setText(QApplication::translate("MyPainterClass", "Grayscale", Q_NULLPTR));
+        actionGrayscale->setText(QApplication::translate("MyPainterClass", "Grayscale Average", Q_NULLPTR));
         actionClose->setText(QApplication::translate("MyPainterClass", "Close", Q_NULLPTR));
-        groupBox->setTitle(QString());
+        actionGrayscale_Weightened->setText(QApplication::translate("MyPainterClass", "Grayscale Weightened", Q_NULLPTR));
+        actionGrayscale_Desaturation->setText(QApplication::translate("MyPainterClass", "Grayscale Desaturation", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));
         toolBar->setWindowTitle(QApplication::translate("MyPainterClass", "toolBar", Q_NULLPTR));

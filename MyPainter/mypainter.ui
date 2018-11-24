@@ -38,16 +38,20 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="QScrollArea" name="scrollAreaHistogram">
+        <property name="widgetResizable">
+         <bool>true</bool>
         </property>
-        <property name="title">
-         <string/>
-        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>272</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -70,7 +74,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>290</width>
+           <width>272</width>
            <height>269</height>
           </rect>
          </property>
@@ -510,7 +514,7 @@
    <sender>actionGrayscale</sender>
    <signal>triggered()</signal>
    <receiver>MyPainterClass</receiver>
-   <slot>grayscale()</slot>
+   <slot>grayscale_ave()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -538,6 +542,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionGrayscale_Desaturation</sender>
+   <signal>triggered()</signal>
+   <receiver>MyPainterClass</receiver>
+   <slot>grayscale_des()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionGrayscale_Weightened</sender>
+   <signal>triggered()</signal>
+   <receiver>MyPainterClass</receiver>
+   <slot>grayscale_wei()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ActionOpen()</slot>
@@ -549,5 +585,8 @@
   <slot>zmena_itemu()</slot>
   <slot>grayscale()</slot>
   <slot>vymaz_item()</slot>
+  <slot>grayscale_ave()</slot>
+  <slot>grayscale_des()</slot>
+  <slot>grayscale_wei()</slot>
  </slots>
 </ui>

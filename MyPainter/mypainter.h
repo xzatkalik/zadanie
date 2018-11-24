@@ -4,6 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mypainter.h"
 #include "paintwidget.h"
+#include "HistogramWidget.h"
 #include <QElapsedTimer>
 
 #include <QListView>
@@ -37,11 +38,17 @@ public slots:
 
 	void grayscale();
 
+	void grayscale_ave();
+	void grayscale_des();
+	void grayscale_wei();
+
+
 	
 
 private:
 	Ui::MyPainterClass ui;
 	PaintWidget paintWidget;
+	HistogramWidget histogramWidget;
 
 	PaintWidget *otvoreny;
 	QList<PaintWidget> otvorene_fronta;

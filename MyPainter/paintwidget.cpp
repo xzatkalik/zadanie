@@ -42,6 +42,9 @@ bool PaintWidget::openImage(const QString &fileName)
 		otvorene_filename.append(fileName);
 		opened = otvorene_image.size() - 1;
 
+		grayscalovane_image.append(image);
+
+
 		this->resize(image.size());
 		this->setMinimumSize(image.size());
 		modified = false;
@@ -186,8 +189,8 @@ void PaintWidget::grayscale(int typ)
 {
 
 	
-	if (!image.isGrayscale())
-	{
+	//if (!image.isGrayscale())
+	//{
 //#pragma omp parallel for default(none)  
 		//std::thread::id main_thread_id = std::this_thread::get_id();
 		switch(typ) {
@@ -209,7 +212,13 @@ void PaintWidget::grayscale(int typ)
 		}
 		  	
 		update();
-	}
+	//}
+}
+
+void PaintWidget::grayscale_uncheck()
+{
+	grayscalovane_image[opened] = image;
+	image = otvorene_image[opened];
 }
 
 void PaintWidget::grayscale_vazeny()

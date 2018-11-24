@@ -37,6 +37,7 @@ public:
 
 	void vypocet_grayscale();
 	void grayscale(int typ);
+	void grayscale_uncheck();
 	//void grayscale();
 
 	void grayscale_vazeny();
@@ -71,6 +72,7 @@ private:
 	QImage image;
 	QList<QImage> otvorene_image;
 	QList<QString> otvorene_filename;
+	QList<QImage> grayscalovane_image;
 	QPoint lastPoint;
 
 	int opened=-1;

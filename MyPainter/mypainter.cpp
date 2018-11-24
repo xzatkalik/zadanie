@@ -10,6 +10,11 @@ MyPainter::MyPainter(QWidget *parent)
 	ui.setupUi(this);
 	ui.scrollArea->setWidget(&this->paintWidget);
 	ui.scrollArea->setBackgroundRole(QPalette::Dark);
+
+	ui.scrollAreaHistogram->setWidget(&this->histogramWidget);
+	ui.scrollAreaHistogram->setBackgroundRole(QPalette::Dark);
+
+	histogramWidget.clearImage();
 }
 
 MyPainter::~MyPainter()
@@ -18,6 +23,13 @@ MyPainter::~MyPainter()
 	/*free(otvoreny);
 	otvorene_fronta.clear();*/
 }
+
+void MyPainter:::resizeEvent(QResizeEvent* event)
+{
+	QMainWindow::resizeEvent(event);
+	// Your code here.
+}
+
 
 void MyPainter::ActionOpen()
 {
@@ -155,6 +167,48 @@ void MyPainter::grayscale()
 	else
 	{
 		i_typ_grayscale = -10;
+	}
+}
+
+void MyPainter::grayscale_ave()
+{
+	if (ui.actionGrayscale->isChecked())
+	{
+		
+		paintWidget.grayscale(0);
+			
+	}
+	else
+	{
+		paintWidget.grayscale_uncheck();
+	}
+}
+
+void MyPainter::grayscale_des()
+{
+	if (ui.actionGrayscale_Desaturation->isChecked())
+	{
+
+		paintWidget.grayscale(2);
+
+	}
+	else
+	{
+		paintWidget.grayscale_uncheck();
+	}
+}
+
+void MyPainter::grayscale_wei()
+{
+	if (ui.actionGrayscale_Weightened->isChecked())
+	{
+
+		paintWidget.grayscale(1);
+
+	}
+	else
+	{
+		paintWidget.grayscale_uncheck();
 	}
 }
 
