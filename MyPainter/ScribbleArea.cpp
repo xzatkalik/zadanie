@@ -105,7 +105,7 @@ void ScribbleArea::resizeEvent(QResizeEvent *event)
 
 	
 	update();
-	kresli_histogram();
+	if(b_vyratane) kresli_histogram();
 
 	QWidget::resizeEvent(event);
 }
@@ -207,6 +207,8 @@ bool ScribbleArea::rataj_histogram(QImage * zdroj)
 
 	najdi_maxima();
 	kresli_histogram();
+
+	b_vyratane = true;
 	return true;
 }
 

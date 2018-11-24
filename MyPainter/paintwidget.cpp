@@ -77,9 +77,16 @@ bool PaintWidget::openImage(const QString &fileName)
 		this->resize(image.size());
 		this->setMinimumSize(image.size());
 		modified = false;
+		
+
+		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
+		
 		update();
 
-		p_histogram->rataj_histogram(&image);
+
+		t0.join();
+
+		//p_histogram->rataj_histogram(&image);
 
 		return true;
 	}
@@ -87,15 +94,29 @@ bool PaintWidget::openImage(const QString &fileName)
 
 bool PaintWidget::changeImage(const QString &fileName)
 {
-	otvorene_image[opened] = image;
+	//otvorene_image[opened] = image;
 
 	//int index = otvorene_filename.indexOf(fileName);
 	//image = otvorene_image[index];
 	//opened = index;
 	opened = otvorene_filename.indexOf(fileName);
 	image = otvorene_image[opened];
+	
+	if(selected_grayscale > -1) this->grayscale(selected_grayscale);
+	
+	
+
+
+	std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
 
 	update();
+
+
+	t0.join();
+
+
+	
+	
 
 	return true;
 }
@@ -199,6 +220,7 @@ void PaintWidget::RotateRight()
 
 void PaintWidget::vypocet_grayscale()
 {
+	int sstav = 0;
 	for (int i = 0; i < image.width(); i++)
 	{
 		for (int j = 0; j < image.height(); j++)
@@ -210,8 +232,11 @@ void PaintWidget::vypocet_grayscale()
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-
-			//std::thread::id main_thread_id = std::this_thread::get_id();
+			sstav++;
+		
+			//stav++;
+			//spracovane->setValue(stav);
+		
 
 		}
 	}
@@ -220,44 +245,68 @@ void PaintWidget::vypocet_grayscale()
 void PaintWidget::grayscale(int typ)
 {
 
-	
-	//if (!image.isGrayscale())
-	//{
-//#pragma omp parallel for default(none)  
-		//std::thread::id main_thread_id = std::this_thread::get_id();
+	selected_grayscale = typ;
+
+	//int stav = 0;
+	stav = 0;
+	int pocet_bodov = image.height() * image.width();
+	QProgressDialog progress("Grayscaling...", "Abort Copy", 0, pocet_bodov, this);
+	progress.setWindowTitle("Grayscaling");
+	progress.show();
+	progress.setWindowModality(Qt::WindowModal);
+
 		switch(typ) {
 		case 0: {
 			std::thread t0(&PaintWidget::vypocet_grayscale, this);
-
+		
+				
+			
 			t0.join();
 			break; }
 		case 1: {
-			std::thread t1(&PaintWidget::grayscale_vazeny, this);
+			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
 			t1.join();
 			break; }
 		case 2: {
-			std::thread t1(&PaintWidget::grayscale_desaturation, this);
+			std::thread t1(&PaintWidget::grayscale_desaturation, this, &stav);
 			t1.join();
 			break; }
 
 
 		}
-		  	
+
+		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
+
 		update();
-	//}
+
+
+		t0.join();
+		
+	
 }
+
+
+
+
 
 void PaintWidget::grayscale_uncheck()
 {
 	grayscalovane_image[opened] = image;
-	image = otvorene_image[opened];
+
+		image = otvorene_image[opened];
+	
+		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
+
+		update();
+
+
+		t0.join();
 }
 
-void PaintWidget::grayscale_vazeny()
+void PaintWidget::grayscale_vazeny(int * spracovane)
 {
 	//grayscale weightened method
-	//if (!image.isGrayscale())
-	//{
+	
 		for (int i = 0; i < image.width(); i++)
 		{
 			for (int j = 0; j < image.height(); j++)
@@ -269,11 +318,7 @@ void PaintWidget::grayscale_vazeny()
 				tmp.setGreen(average);
 				image.setPixelColor(i, j, tmp);
 
-				int th = omp_get_thread_num();
-				if (th > 0)
-				{
-
-				}
+				
 			}
 		}
 
@@ -281,7 +326,7 @@ void PaintWidget::grayscale_vazeny()
 	//}
 }
 
-void PaintWidget::grayscale_desaturation()
+void PaintWidget::grayscale_desaturation(int * spracovane)
 {
 	
 	for (int i = 0; i < image.width(); i++)
@@ -299,11 +344,7 @@ void PaintWidget::grayscale_desaturation()
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-			int th = omp_get_thread_num();
-			if (th > 0)
-			{
-
-			}
+			
 		}
 	}
 

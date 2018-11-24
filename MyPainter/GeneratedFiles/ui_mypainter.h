@@ -64,12 +64,13 @@ public:
     QMenu *menuEffects;
     QStatusBar *statusBar;
     QToolBar *toolBar;
+    QToolBar *toolBar_2;
 
     void setupUi(QMainWindow *MyPainterClass)
     {
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
-        MyPainterClass->resize(552, 440);
+        MyPainterClass->resize(529, 488);
         QIcon icon;
         icon.addFile(QStringLiteral(":/ikonky/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         MyPainterClass->setWindowIcon(icon);
@@ -158,7 +159,7 @@ public:
         scrollAreaHistogram->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 260, 128));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 254, 176));
         scrollAreaHistogram->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_3->addWidget(scrollAreaHistogram);
@@ -176,7 +177,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 260, 326));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 243, 374));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);
@@ -187,7 +188,7 @@ public:
         MyPainterClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MyPainterClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 552, 21));
+        menuBar->setGeometry(QRect(0, 0, 529, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEffects = new QMenu(menuBar);
@@ -200,6 +201,9 @@ public:
         toolBar->setObjectName(QStringLiteral("toolBar"));
         toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
         MyPainterClass->addToolBar(Qt::TopToolBarArea, toolBar);
+        toolBar_2 = new QToolBar(MyPainterClass);
+        toolBar_2->setObjectName(QStringLiteral("toolBar_2"));
+        MyPainterClass->addToolBar(Qt::TopToolBarArea, toolBar_2);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEffects->menuAction());
@@ -269,6 +273,7 @@ public:
         menuFile->setTitle(QApplication::translate("MyPainterClass", "File", Q_NULLPTR));
         menuEffects->setTitle(QApplication::translate("MyPainterClass", "Effects", Q_NULLPTR));
         toolBar->setWindowTitle(QApplication::translate("MyPainterClass", "toolBar", Q_NULLPTR));
+        toolBar_2->setWindowTitle(QApplication::translate("MyPainterClass", "toolBar_2", Q_NULLPTR));
     } // retranslateUi
 
 };

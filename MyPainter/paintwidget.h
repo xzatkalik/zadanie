@@ -44,14 +44,16 @@ public:
 	void RotateLeft();
 	void RotateRight();
 
+	
+	//void vypocet_grayscale(int * spracovane);
 	void vypocet_grayscale();
 	void grayscale(int typ);
 	void grayscale_uncheck();
 	//void grayscale();
 
-	void grayscale_vazeny();
+	void grayscale_vazeny(int * spracovane);
 
-	void grayscale_desaturation();
+	void grayscale_desaturation(int * spracovane);
 
 
 	bool isModified() const { return modified; }
@@ -89,8 +91,10 @@ private:
 	QPoint lastPoint;
 
 	int opened=-1;
-	
 
+	int selected_grayscale = -1;
+	
+	int stav;
 	
 };
 

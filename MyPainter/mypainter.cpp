@@ -181,8 +181,11 @@ void MyPainter::grayscale_ave()
 {
 	if (ui->actionGrayscale->isChecked())
 	{
-		
+		paintWidget->grayscale_uncheck();
 		paintWidget->grayscale(0);
+
+		ui->actionGrayscale_Desaturation->setChecked(false);
+		ui->actionGrayscale_Weightened->setChecked(false);
 			
 	}
 	else
@@ -195,8 +198,10 @@ void MyPainter::grayscale_des()
 {
 	if (ui->actionGrayscale_Desaturation->isChecked())
 	{
-
+		paintWidget->grayscale_uncheck();
 		paintWidget->grayscale(2);
+		ui->actionGrayscale->setChecked(false);
+		ui->actionGrayscale_Weightened->setChecked(false);
 
 	}
 	else
@@ -209,8 +214,10 @@ void MyPainter::grayscale_wei()
 {
 	if (ui->actionGrayscale_Weightened->isChecked())
 	{
-
+		paintWidget->grayscale_uncheck();
 		paintWidget->grayscale(1);
+		ui->actionGrayscale_Desaturation->setChecked(false);
+		ui->actionGrayscale->setChecked(false);
 
 	}
 	else

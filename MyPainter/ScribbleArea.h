@@ -45,6 +45,8 @@ private:
 	void drawLineTo(const QPoint &endPoint);
 	void resizeImage(QImage *image, const QSize &newSize);
 
+	bool b_vyratane = false;
+
 	bool modified;
 	bool scribbling;
 	int myPenWidth;
