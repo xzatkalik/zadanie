@@ -70,7 +70,7 @@ public:
     {
         if (MyPainterClass->objectName().isEmpty())
             MyPainterClass->setObjectName(QStringLiteral("MyPainterClass"));
-        MyPainterClass->resize(529, 488);
+        MyPainterClass->resize(529, 465);
         QIcon icon;
         icon.addFile(QStringLiteral(":/ikonky/resources/icon_application.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         MyPainterClass->setWindowIcon(icon);
@@ -159,7 +159,7 @@ public:
         scrollAreaHistogram->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 254, 176));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 254, 153));
         scrollAreaHistogram->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_3->addWidget(scrollAreaHistogram);
@@ -177,7 +177,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 243, 374));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 243, 351));
         scrollArea->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout->addWidget(scrollArea);

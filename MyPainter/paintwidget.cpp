@@ -218,7 +218,7 @@ void PaintWidget::RotateRight()
 }
 
 
-void PaintWidget::vypocet_grayscale()
+void PaintWidget::vypocet_grayscale(int *spracovane)
 {
 	int sstav = 0;
 	for (int i = 0; i < image.width(); i++)
@@ -232,7 +232,7 @@ void PaintWidget::vypocet_grayscale()
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-			sstav++;
+			*spracovane = (i*image.width() + j);
 		
 			//stav++;
 			//spracovane->setValue(stav);
@@ -250,27 +250,43 @@ void PaintWidget::grayscale(int typ)
 	//int stav = 0;
 	stav = 0;
 	int pocet_bodov = image.height() * image.width();
-	QProgressDialog progress("Grayscaling...", "Abort Copy", 0, pocet_bodov, this);
+	QProgressDialog progress(this);
+	progress.setMinimum(0);
+	progress.setMaximum(pocet_bodov);
 	progress.setWindowTitle("Grayscaling");
-	progress.show();
+	
 	progress.setWindowModality(Qt::WindowModal);
+
 
 		switch(typ) {
 		case 0: {
-			std::thread t0(&PaintWidget::vypocet_grayscale, this);
-		
-				
+			std::thread t0(&PaintWidget::vypocet_grayscale, this, &stav);
 			
+			
+			progress.show();
+			while (stav < pocet_bodov) {
+				progress.setValue(stav);
+			}
 			t0.join();
 			break; }
 		case 1: {
-			progress.setValue(stav);
-			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
 			
+			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
+			progress.show();
+			
+			while(stav<pocet_bodov){
+				progress.setValue(stav);
+			 }
 			t1.join();
+
+			
 			break; }
 		case 2: {
 			std::thread t1(&PaintWidget::grayscale_desaturation, this, &stav);
+			progress.show();
+			while (stav < pocet_bodov) {
+				progress.setValue(stav);
+			}
 			t1.join();
 			break; }
 
@@ -348,7 +364,7 @@ void PaintWidget::grayscale_desaturation(int * spracovane)
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-			
+			*spracovane =  (i*image.width() + j);
 		}
 	}
 

@@ -45,8 +45,8 @@ public:
 	void RotateRight();
 
 	
-	//void vypocet_grayscale(int * spracovane);
-	void vypocet_grayscale();
+	void vypocet_grayscale(int * spracovane);
+	//void vypocet_grayscale();
 	void grayscale(int typ);
 	void grayscale_uncheck();
 	//void grayscale_vazeny(QProgressDialog * spracovane);
