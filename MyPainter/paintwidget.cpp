@@ -25,7 +25,8 @@ PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent)
 	myPenWidth = 1;
 	myPenColor = Qt::blue;
 
-	
+	/*newImage(800, 600);
+	clearImage();*/
 }
 
 PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget, QWidget *parent)
@@ -103,7 +104,6 @@ bool PaintWidget::changeImage(const QString &fileName)
 	image = otvorene_image[opened];
 	
 	if(selected_grayscale > -1) this->grayscale(selected_grayscale);
-	
 	
 
 
@@ -264,7 +264,9 @@ void PaintWidget::grayscale(int typ)
 			t0.join();
 			break; }
 		case 1: {
+			progress.setValue(stav);
 			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
+			
 			t1.join();
 			break; }
 		case 2: {
@@ -292,6 +294,7 @@ void PaintWidget::grayscale(int typ)
 void PaintWidget::grayscale_uncheck()
 {
 	grayscalovane_image[opened] = image;
+	selected_grayscale = -1;
 
 		image = otvorene_image[opened];
 	
@@ -306,7 +309,7 @@ void PaintWidget::grayscale_uncheck()
 void PaintWidget::grayscale_vazeny(int * spracovane)
 {
 	//grayscale weightened method
-	
+		
 		for (int i = 0; i < image.width(); i++)
 		{
 			for (int j = 0; j < image.height(); j++)
@@ -318,6 +321,7 @@ void PaintWidget::grayscale_vazeny(int * spracovane)
 				tmp.setGreen(average);
 				image.setPixelColor(i, j, tmp);
 
+				*spracovane = (i*image.width() + j);
 				
 			}
 		}

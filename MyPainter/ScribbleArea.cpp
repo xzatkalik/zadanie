@@ -60,24 +60,38 @@ void ScribbleArea::clearImage()
 
 void ScribbleArea::mousePressEvent(QMouseEvent *event)
 {
-	if (event->button() == Qt::LeftButton) {
+	/*if (event->button() == Qt::LeftButton) {
 		lastPoint = event->pos();
 		scribbling = true;
-	}
+	}*/
+	QMessageBox info;
+	info.setWindowTitle("Histogram info");
+	QString text;
+	QPoint bodik = event->pos();
+
+	double krok = (double)width() / (double)256;
+	int hodnota = bodik.x() / krok ;
+	info.setText("Value " + QString::number(hodnota) +
+		"\n Red je: " + QString::number(pocetnost_red[hodnota]) + 
+		"\n Green je: " + QString::number(pocetnost_green[hodnota]) + 
+		"\n Blue je: " + QString::number(pocetnost_blue[hodnota])
+	);
+	info.exec();
 }
 
 void ScribbleArea::mouseMoveEvent(QMouseEvent *event)
 {
-	if ((event->buttons() & Qt::LeftButton) && scribbling)
-		drawLineTo(event->pos());
+	/*if ((event->buttons() & Qt::LeftButton) && scribbling)
+		drawLineTo(event->pos());*/
+
 }
 
 void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
 {
-	if (event->button() == Qt::LeftButton && scribbling) {
+	/*if (event->button() == Qt::LeftButton && scribbling) {
 		drawLineTo(event->pos());
 		scribbling = false;
-	}
+	}*/
 }
 
 void ScribbleArea::paintEvent(QPaintEvent *event)
@@ -150,6 +164,7 @@ void ScribbleArea::cisti_pocetnosti()
 
 void ScribbleArea::najdi_maxima()
 {
+	max = 0;
 	for (int i = 0; i < 256; i++)
 	{
 		if (pocetnost_red[i] > max) max = pocetnost_red[i];
@@ -165,7 +180,7 @@ void ScribbleArea::kresli_ciaru(QPainter * platno, int * pocetnosti)
 	int newHeight = height();
 	int os_y = newHeight;
 
-	double krok = (double)newWidth / (double)256 + 0.5;
+	double krok = (double)newWidth / (double)256;
 
 	bod aktualny;
 	bod predosly;

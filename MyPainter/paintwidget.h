@@ -49,6 +49,7 @@ public:
 	void vypocet_grayscale();
 	void grayscale(int typ);
 	void grayscale_uncheck();
+	//void grayscale_vazeny(QProgressDialog * spracovane);
 	//void grayscale();
 
 	void grayscale_vazeny(int * spracovane);
