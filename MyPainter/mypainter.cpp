@@ -179,50 +179,78 @@ void MyPainter::grayscale()
 
 void MyPainter::grayscale_ave()
 {
-	if (ui->actionGrayscale->isChecked())
-	{
-		paintWidget->grayscale_uncheck();
-		paintWidget->grayscale(0);
-
-		ui->actionGrayscale_Desaturation->setChecked(false);
-		ui->actionGrayscale_Weightened->setChecked(false);
-			
+	if (ui->listWidget->count() < 1) {
+		QMessageBox hlaska;
+		hlaska.setWindowTitle("Varovanie");
+		hlaska.setText("Nie je otvoren ziadny obrazok");
+		hlaska.exec();
+		ui->actionGrayscale->setChecked(false);
 	}
-	else
-	{
-		paintWidget->grayscale_uncheck();
+	else {
+
+		if (ui->actionGrayscale->isChecked())
+		{
+			paintWidget->grayscale_uncheck();
+			paintWidget->grayscale(0);
+
+			ui->actionGrayscale_Desaturation->setChecked(false);
+			ui->actionGrayscale_Weightened->setChecked(false);
+
+		}
+		else
+		{
+			paintWidget->grayscale_uncheck();
+		}
 	}
 }
 
 void MyPainter::grayscale_des()
 {
-	if (ui->actionGrayscale_Desaturation->isChecked())
-	{
-		paintWidget->grayscale_uncheck();
-		paintWidget->grayscale(2);
-		ui->actionGrayscale->setChecked(false);
-		ui->actionGrayscale_Weightened->setChecked(false);
-
+	if (ui->listWidget->count() < 1) {
+		QMessageBox hlaska;
+		hlaska.setWindowTitle("Varovanie");
+		hlaska.setText("Nie je otvoren ziadny obrazok");
+		hlaska.exec();
+		ui->actionGrayscale_Desaturation->setChecked(false);
 	}
-	else
-	{
-		paintWidget->grayscale_uncheck();
+	else {
+		if (ui->actionGrayscale_Desaturation->isChecked())
+		{
+			paintWidget->grayscale_uncheck();
+			paintWidget->grayscale(2);
+			ui->actionGrayscale->setChecked(false);
+			ui->actionGrayscale_Weightened->setChecked(false);
+
+		}
+		else
+		{
+			paintWidget->grayscale_uncheck();
+		}
 	}
 }
 
 void MyPainter::grayscale_wei()
 {
-	if (ui->actionGrayscale_Weightened->isChecked())
-	{
-		paintWidget->grayscale_uncheck();
-		paintWidget->grayscale(1);
-		ui->actionGrayscale_Desaturation->setChecked(false);
-		ui->actionGrayscale->setChecked(false);
-
+	if (ui->listWidget->count() < 1) {
+		QMessageBox hlaska;
+		hlaska.setWindowTitle("Varovanie");
+		hlaska.setText("Nie je otvoren ziadny obrazok");
+		hlaska.exec();
+		ui->actionGrayscale_Weightened->setChecked(false);
 	}
-	else
-	{
-		paintWidget->grayscale_uncheck();
+	else {
+		if (ui->actionGrayscale_Weightened->isChecked())
+		{
+			paintWidget->grayscale_uncheck();
+			paintWidget->grayscale(1);
+			ui->actionGrayscale_Desaturation->setChecked(false);
+			ui->actionGrayscale->setChecked(false);
+
+		}
+		else
+		{
+			paintWidget->grayscale_uncheck();
+		}
 	}
 }
 

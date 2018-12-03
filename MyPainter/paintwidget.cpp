@@ -25,6 +25,8 @@ PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent)
 	myPenWidth = 1;
 	myPenColor = Qt::blue;
 
+
+	otvorene_image.clear();
 	/*newImage(800, 600);
 	clearImage();*/
 }
@@ -244,25 +246,23 @@ void PaintWidget::vypocet_grayscale(int *spracovane)
 
 void PaintWidget::grayscale(int typ)
 {
-
 	selected_grayscale = typ;
+		//int stav = 0;
+		stav = 0;
+		int pocet_bodov = image.height() * image.width();
+		QProgressDialog progress(this);
+		progress.setMinimum(0);
+		progress.setMaximum(pocet_bodov);
+		progress.setWindowTitle("Grayscaling");
 
-	//int stav = 0;
-	stav = 0;
-	int pocet_bodov = image.height() * image.width();
-	QProgressDialog progress(this);
-	progress.setMinimum(0);
-	progress.setMaximum(pocet_bodov);
-	progress.setWindowTitle("Grayscaling");
-	
-	progress.setWindowModality(Qt::WindowModal);
+		progress.setWindowModality(Qt::WindowModal);
 
 
-		switch(typ) {
+		switch (typ) {
 		case 0: {
 			std::thread t0(&PaintWidget::vypocet_grayscale, this, &stav);
-			
-			
+
+
 			progress.show();
 			while (stav < pocet_bodov) {
 				progress.setValue(stav);
@@ -270,16 +270,16 @@ void PaintWidget::grayscale(int typ)
 			t0.join();
 			break; }
 		case 1: {
-			
+
 			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
 			progress.show();
-			
-			while(stav<pocet_bodov){
+
+			while (stav < pocet_bodov) {
 				progress.setValue(stav);
-			 }
+			}
 			t1.join();
 
-			
+
 			break; }
 		case 2: {
 			std::thread t1(&PaintWidget::grayscale_desaturation, this, &stav);
@@ -299,8 +299,8 @@ void PaintWidget::grayscale(int typ)
 
 
 		t0.join();
-		
-	
+
+
 }
 
 
