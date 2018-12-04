@@ -64,14 +64,11 @@ PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget
 
 void PaintWidget::timer_check()
 {
-	//parent
+	
 	if (thread_0.joinable()) {
-		thread_0.detach();
-		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
-
+		thread_0.join();
 		update();
-
-
+		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
 		t0.join();
 		stav = -1;
 	}

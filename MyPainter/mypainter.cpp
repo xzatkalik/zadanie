@@ -22,7 +22,7 @@ MyPainter::MyPainter(QWidget *parent)
 	ui->scrollAreaHistogram->setBackgroundRole(QPalette::Dark);
 	//histogramWidget.clearImage();
 
-	timerId = startTimer(1000);
+	timerId = startTimer(10);
 
 	this->setWindowTitle(window_text);
 
@@ -265,7 +265,7 @@ void MyPainter::timerEvent(QTimerEvent * event)
 
 	int aktual = paintWidget->get_progress_percent();
 	
-	if (aktual < 0) {
+	if (aktual < 0 || aktual >= 100) {
 		this->setWindowTitle(window_text);
 	}
 	else
