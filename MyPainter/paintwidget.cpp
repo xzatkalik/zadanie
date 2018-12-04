@@ -14,6 +14,18 @@
 	
 }*/
 
+int PaintWidget::get_progress_percent()
+{
+	if (stav < 0) { 
+		return -1; 
+	}
+	else {
+		double percent = ((stav / (image.width()*image.height())) * 100);
+		return (int)percent;
+	}
+
+}
+
 PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent)
 	: QWidget(parent)
 {
@@ -27,6 +39,9 @@ PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent)
 
 
 	otvorene_image.clear();
+
+
+
 	/*newImage(800, 600);
 	clearImage();*/
 }
@@ -43,6 +58,24 @@ PaintWidget::PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget
 	myPenColor = Qt::blue;
 
 	p_histogram = histoWidget;
+
+	
+}
+
+void PaintWidget::timer_check()
+{
+	//parent
+	if (thread_0.joinable()) {
+		thread_0.detach();
+		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
+
+		update();
+
+
+		t0.join();
+		stav = -1;
+	}
+
 }
 
 bool PaintWidget::openImage(const QString &fileName)
@@ -235,6 +268,7 @@ void PaintWidget::vypocet_grayscale(int *spracovane)
 			image.setPixelColor(i, j, tmp);
 
 			*spracovane = (i*image.width() + j);
+			//stav = (i*image.width() + j);
 		
 			//stav++;
 			//spracovane->setValue(stav);
@@ -250,55 +284,39 @@ void PaintWidget::grayscale(int typ)
 		//int stav = 0;
 		stav = 0;
 		int pocet_bodov = image.height() * image.width();
-		QProgressDialog progress(this);
-		progress.setMinimum(0);
-		progress.setMaximum(pocet_bodov);
-		progress.setWindowTitle("Grayscaling");
-
-		progress.setWindowModality(Qt::WindowModal);
-
-
+	
 		switch (typ) {
 		case 0: {
-			std::thread t0(&PaintWidget::vypocet_grayscale, this, &stav);
+			//std::thread t0(&PaintWidget::vypocet_grayscale, this, &stav);
+			thread_0 = std::thread(&PaintWidget::vypocet_grayscale, this, &stav);
 
-
-			progress.show();
+			/*progress.show();
 			while (stav < pocet_bodov) {
 				progress.setValue(stav);
 			}
-			t0.join();
+			//t0.join();*/
 			break; }
 		case 1: {
 
-			std::thread t1(&PaintWidget::grayscale_vazeny, this, &stav);
-			progress.show();
-
-			while (stav < pocet_bodov) {
-				progress.setValue(stav);
-			}
-			t1.join();
+			thread_0 = std::thread(&PaintWidget::grayscale_vazeny, this, &stav);
+		
 
 
 			break; }
 		case 2: {
-			std::thread t1(&PaintWidget::grayscale_desaturation, this, &stav);
-			progress.show();
-			while (stav < pocet_bodov) {
-				progress.setValue(stav);
-			}
-			t1.join();
+			thread_0 = std::thread(&PaintWidget::grayscale_desaturation, this, &stav);
+		
 			break; }
 
 
 		}
 
-		std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
+		//std::thread t0(&ScribbleArea::rataj_histogram, p_histogram, &image);
 
 		update();
 
 
-		t0.join();
+		//t0.join();
 
 
 }
@@ -379,6 +397,8 @@ void PaintWidget::clearImage()
 	update();
 }
 
+
+
 void PaintWidget::mousePressEvent(QMouseEvent *event)
 {
 	if (event->button() == Qt::LeftButton) {
@@ -399,6 +419,11 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
 void PaintWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
 	
+}
+
+void PaintWidget::timerEvent(QTimerEvent * event)
+{
+	qDebug() << "Update...";
 }
 
 void PaintWidget::mouseMoveEvent(QMouseEvent *event)

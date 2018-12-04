@@ -27,9 +27,15 @@ class PaintWidget : public QWidget
 public:
 	//PaintWidget(QWidget *parent = 0);
 
+	int stav = -1;
+
+	int get_progress_percent();
+
 	PaintWidget(Ui::MyPainterClass *parentUI, QWidget *parent = 0);
 
 	PaintWidget(Ui::MyPainterClass *parentUI, ScribbleArea *histoWidget, QWidget *parent = 0);
+
+	void timer_check();
 
 
 
@@ -63,6 +69,7 @@ public:
 
 	public slots:
 	void clearImage();
+	
 
 protected:
 	void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
@@ -72,9 +79,14 @@ protected:
 	void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 	void mouseDoubleClickEvent(QMouseEvent *event);
 
+	void timerEvent(QTimerEvent *event);
+
 private:
 	Ui::MyPainterClass *ui;
 	ScribbleArea *p_histogram;
+
+	std::thread thread_0;
+	
 
 
 	void drawLineTo(const QPoint &endPoint);
@@ -95,7 +107,7 @@ private:
 
 	int selected_grayscale = -1;
 	
-	int stav;
+	
 	
 };
 

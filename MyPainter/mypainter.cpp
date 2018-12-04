@@ -21,11 +21,16 @@ MyPainter::MyPainter(QWidget *parent)
 	ui->scrollAreaHistogram->setWidget(this->p_histogramWidget);
 	ui->scrollAreaHistogram->setBackgroundRole(QPalette::Dark);
 	//histogramWidget.clearImage();
+
+	timerId = startTimer(1000);
+
+	this->setWindowTitle(window_text);
+
 }
 
 MyPainter::~MyPainter()
 {
-	
+	killTimer(timerId);
 	/*free(otvoreny);
 	otvorene_fronta.clear();*/
 }
@@ -252,5 +257,21 @@ void MyPainter::grayscale_wei()
 			paintWidget->grayscale_uncheck();
 		}
 	}
+}
+
+void MyPainter::timerEvent(QTimerEvent * event)
+{
+	paintWidget->timer_check();
+
+	int aktual = paintWidget->get_progress_percent();
+	
+	if (aktual < 0) {
+		this->setWindowTitle(window_text);
+	}
+	else
+	{
+		this->setWindowTitle("Spracovene na : " + QString::number(aktual) + "%");
+	}
+
 }
 

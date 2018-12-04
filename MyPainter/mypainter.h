@@ -54,6 +54,10 @@ private:
 	Ui::MyPainterClass *ui;
 	PaintWidget *paintWidget;
 
+	const QString window_text = "Zadanie ZATKALIK";
+
+	int timerId;
+
 	ScribbleArea histogramWidget;
 	
 
@@ -67,6 +71,10 @@ private:
 	QList<QString> otvorene_filenames;
 
 	int i_typ_grayscale = -10;
+
+
+protected:
+	void timerEvent(QTimerEvent *event);
 	
 };
 
