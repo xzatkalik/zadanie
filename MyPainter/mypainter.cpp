@@ -274,4 +274,3 @@ void MyPainter::timerEvent(QTimerEvent * event)
 	}
 
 }
-
