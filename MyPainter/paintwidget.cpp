@@ -252,19 +252,25 @@ void PaintWidget::RotateRight()
 
 void PaintWidget::vypocet_grayscale(int *spracovane)
 {
+	
+
 	int sstav = 0;
+	QColor tmp;
+	omp_set_num_threads(4);
+#pragma omp parallel for default(none) \
+private(tmp) shared(spracovane)
 	for (int i = 0; i < image.width(); i++)
 	{
 		for (int j = 0; j < image.height(); j++)
 		{
-			QColor tmp = image.pixelColor(i, j);
+			tmp = image.pixelColor(i, j);
 			int average = (tmp.red() + tmp.blue() + tmp.red()) / 3;
 			tmp.setBlue(average);
 			tmp.setRed(average);
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
 
-			*spracovane = (i*image.width() + j);
+			//*spracovane = (i*image.width() + j);
 			//stav = (i*image.width() + j);
 		
 			//stav++;
@@ -339,13 +345,16 @@ void PaintWidget::grayscale_uncheck()
 
 void PaintWidget::grayscale_vazeny(int * spracovane)
 {
+	QColor tmp;
 	//grayscale weightened method
-		
+	omp_set_num_threads(4);
+#pragma omp parallel for default(none) \
+private(tmp) shared(spracovane)
 		for (int i = 0; i < image.width(); i++)
 		{
 			for (int j = 0; j < image.height(); j++)
 			{
-				QColor tmp = image.pixelColor(i, j);
+				tmp = image.pixelColor(i, j);
 				int average = (int)((0.3*tmp.red() + 0.59*tmp.blue() + 0.11*tmp.red()) + 0.5);
 				tmp.setBlue(average);
 				tmp.setRed(average);
@@ -353,9 +362,10 @@ void PaintWidget::grayscale_vazeny(int * spracovane)
 				image.setPixelColor(i, j, tmp);
 
 				*spracovane = (i*image.width() + j);
-				
+
 			}
 		}
+	
 
 		//update();
 	//}
@@ -363,12 +373,15 @@ void PaintWidget::grayscale_vazeny(int * spracovane)
 
 void PaintWidget::grayscale_desaturation(int * spracovane)
 {
-	
+	QColor tmp;
+	omp_set_num_threads(4);
+#pragma omp parallel for default(none) \
+private(tmp) shared(spracovane)
 	for (int i = 0; i < image.width(); i++)
 	{
 		for (int j = 0; j < image.height(); j++)
 		{
-			QColor tmp = image.pixelColor(i, j);
+			tmp = image.pixelColor(i, j);
 			int max = std::max(tmp.red(), tmp.blue());
 				max = std::max(max, tmp.red());
 			int min = std::min(tmp.red(), tmp.blue());

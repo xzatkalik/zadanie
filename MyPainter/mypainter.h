@@ -18,6 +18,9 @@
 
 #include <QPixmap>
 
+//#include <omp.h>
+
+
 
 class MyPainter : public QMainWindow
 {
