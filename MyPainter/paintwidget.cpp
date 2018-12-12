@@ -391,8 +391,11 @@ private(tmp) shared(spracovane)
 			tmp.setRed(average);
 			tmp.setGreen(average);
 			image.setPixelColor(i, j, tmp);
-
-			*spracovane =  (i*image.width() + j);
+			/*int prem=0;
+			while (prem < 1000000) {
+				prem++;
+			}
+			*spracovane =  (i*image.width() + j);*/
 		}
 	}
 
